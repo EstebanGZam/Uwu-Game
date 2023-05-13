@@ -50,15 +50,15 @@ public class Menu1 implements Initializable {
 
         File menu2File = new File("src/main/java/com/example/ti3/image/menu2.jpg");
         Image menu2Image = new Image(menu2File.toURI().toString());
-        graficos.drawImage(menu2Image, 0, 0, 700, 500);
+        graficos.drawImage(menu2Image, 0, 0, 760.0, 576.0);
 
         File logo2File = new File("src/main/java/com/example/ti3/image/logo2.png");
         Image logo2Image = new Image(logo2File.toURI().toString());
-        graficos.drawImage(logo2Image, -100, -100, 900, 700);
+        graficos.drawImage(logo2Image, -100, -100, 960, 776);
 
         File enterFile = new File("src/main/java/com/example/ti3/image/enter.png");
         Image enterImage = new Image(enterFile.toURI().toString());
-        graficos.drawImage(enterImage, 0, 130, 700, 500);
+        graficos.drawImage(enterImage, 0, 130, 760, 576);
 
     }
 

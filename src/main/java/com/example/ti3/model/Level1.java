@@ -29,10 +29,6 @@ public class Level1 extends Thread  implements Initializable   {
 
     Player player = new Player("",100,100,4,3,g,keyHandler);
 
-    int playerX=100;
-    int playerY=100;
-
-    int playerSpeed=4;
     @Override
     public void run() {
         double drawInterval =1000000000/fps;

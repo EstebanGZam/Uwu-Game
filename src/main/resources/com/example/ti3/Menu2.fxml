@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ti3.model.Menu2">
+<AnchorPane prefHeight="576.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ti3.model.Menu2">
    <children>
-      <Canvas fx:id="canvas" height="500.0" width="700.0" />
+      <Canvas fx:id="canvas" height="576.0" width="760.0" />
       <TextField fx:id="up" layoutX="159.0" layoutY="78.0" />
       <TextField fx:id="down" layoutX="159.0" layoutY="175.0" />
       <TextField fx:id="right" layoutX="159.0" layoutY="287.0" />

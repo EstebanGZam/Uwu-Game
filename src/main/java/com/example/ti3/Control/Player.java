@@ -127,7 +127,7 @@ public class Player extends ObjetoJuego {
                 }
                 break;
         }
-        g.drawImage(image,getX(),getY(),32,32);
+        g.drawImage(image,getX(),getY(),48,48);
     }
 
     @Override
