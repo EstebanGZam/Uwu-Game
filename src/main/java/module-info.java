@@ -1,14 +1,14 @@
-module com.example.ti3 {
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires javafx.media;
-    requires java.desktop;
+module com.example.integrativeTask {
+	requires javafx.controls;
+	requires javafx.fxml;
+	requires javafx.media;
+	requires java.desktop;
 
+	opens com.example.integrativeTask to javafx.fxml;
+	exports com.example.integrativeTask.model;
+	opens com.example.integrativeTask.model to javafx.fxml;
+	exports com.example.integrativeTask;
+	exports com.example.integrativeTask.Control;
+	opens com.example.integrativeTask.Control to javafx.fxml;
 
-    opens com.example.ti3 to javafx.fxml;
-    exports com.example.ti3.model;
-    opens com.example.ti3.model to javafx.fxml;
-    exports com.example.ti3;
-    exports com.example.ti3.Control;
-    opens com.example.ti3.Control to javafx.fxml;
 }

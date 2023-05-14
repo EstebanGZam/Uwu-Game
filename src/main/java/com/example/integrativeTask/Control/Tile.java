@@ -1,4 +1,4 @@
-package com.example.ti3.Control;
+package com.example.integrativeTask.Control;
 
 import javafx.scene.image.Image;
 
