@@ -7,8 +7,9 @@ public abstract class ObjetoJuego {
 
     private String image;
 
-    private int x;
-    private int y;
+
+    private int Worldx;
+    private int Worldy;
 
     Image up1,up2,up3,down1,down2,down3,left1,left2,left3,right1,right2,right3;
     private int speed;
@@ -26,8 +27,8 @@ public abstract class ObjetoJuego {
 
     public ObjetoJuego(String image, int x, int y, int speed) {
         this.image = image;
-        this.x = x;
-        this.y = y;
+        this.Worldx = x;
+        this.Worldy = y;
         this.speed = speed;
         direction="down";
     }
@@ -40,20 +41,20 @@ public abstract class ObjetoJuego {
         this.image = image;
     }
 
-    public int getX() {
-        return x;
+    public int getWorldx() {
+        return Worldx;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setWorldx(int worldx) {
+        Worldx = worldx;
     }
 
-    public int getY() {
-        return y;
+    public int getWorldy() {
+        return Worldy;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setWorldy(int worldy) {
+        Worldy = worldy;
     }
 
     public int getSpeed() {

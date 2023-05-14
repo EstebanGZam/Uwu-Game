@@ -1,6 +1,7 @@
 package com.example.ti3.Control;
 
 import com.example.ti3.model.KeyHandler;
+import com.example.ti3.model.Level1;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -22,6 +23,9 @@ public class Player extends ObjetoJuego {
 
     KeyHandler keyHandler;
 
+    public final int ScreenX=768/2-(48/2);
+    public final int ScreenY= 560/2-(48/2);
+
 
 
     public Player(String image, int x, int y, int speed, int lifes,GraphicsContext gr,KeyHandler keyHandler) {
@@ -29,13 +33,14 @@ public class Player extends ObjetoJuego {
         this.gr=gr;
         this.keyHandler=keyHandler;
         this.lifes = lifes;
+        setDefault();
         getPlayerImage();
     }
 
 
     public void setDefault(){
-        setX(100);
-        setY(100);
+        setWorldx(100*4);
+        setWorldy(100*4);
         setLifes(3);
         setSpeed(4);
         setDirection("down");
@@ -127,7 +132,7 @@ public class Player extends ObjetoJuego {
                 }
                 break;
         }
-        g.drawImage(image,getX(),getY(),48,48);
+        g.drawImage(image,ScreenX,ScreenY,48,48);
     }
 
     @Override
@@ -136,16 +141,16 @@ public class Player extends ObjetoJuego {
                 ||keyHandler.rightPressed){
             if(keyHandler.upPresed){
                 setDirection("up");
-                setY(getY()-getSpeed());
+                setWorldy(getWorldy()-getSpeed());
             }else if(keyHandler.downPressed){
                 setDirection("down");
-                setY(getY()+getSpeed());
+                setWorldy(getWorldy()+getSpeed());
             }else if(keyHandler.leftPressed){
                 setDirection("left");
-                setX(getX()-getSpeed());
+                setWorldx(getWorldx()-getSpeed());
             }else if(keyHandler.rightPressed){
                 setDirection("right");
-                setX(getX()+getSpeed());
+                setWorldx(getWorldx()+getSpeed());
             }
             setSpriteCounter(getSpriteCounter()+1);
 

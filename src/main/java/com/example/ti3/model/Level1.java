@@ -17,6 +17,23 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Level1 extends Thread  implements Initializable   {
+
+    public final int originTileSize= 16;
+    public final int scale= 3;
+
+    public final int tilesSize=48;
+
+    public final int maxScreenCol =16;
+    public final int maxScreenRow =12;
+
+    public final int screenWidth =tilesSize*maxScreenCol;
+    public final int screenHight =tilesSize*maxScreenRow;
+
+    public final int maxWorldCol =50;
+    public final int maxWorldRow =50;
+    public final int worldwith =2400;
+    public final int worldhight =2400;
+
     public Canvas canvas;
 
     int fps=60;
@@ -65,7 +82,7 @@ public class Level1 extends Thread  implements Initializable   {
 
     public void paintComponent(GraphicsContext g){
         g = canvas.getGraphicsContext2D();
-        tile.draw(g);
+        tile.draw(g,player.getWorldx(),player.getWorldy(),player.ScreenX,player.ScreenY);
         player.print(g);
         g.closePath();
 

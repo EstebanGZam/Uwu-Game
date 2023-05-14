@@ -20,7 +20,7 @@ public class TileManager {
         this.gr=gr;
 
         tile = new Tile[10];
-        mapTileNum = new int[16][12];
+        mapTileNum = new int[17][32];
         getTitleImage();
         loadGame();
     }
@@ -85,18 +85,18 @@ public class TileManager {
             int col=0;
             int row=0;
 
-            while(col<16&& row<12){
+            while(col<32&& row<17){
 
                 String line =reader.readLine();
-                while (col< 16){
+                while (col< 32){
                     String nume[]=line.split(" ");
 
                     int num = Integer.parseInt(nume[col]);
 
-                    mapTileNum[col][row] =num;
+                    mapTileNum[row][col] =num;
                     col++;
                 }
-                if(col==16){
+                if(col==32){
                     col=0;
                     row++;
                 }
@@ -108,24 +108,27 @@ public class TileManager {
         }
     }
 
-    public void draw(GraphicsContext g2){
+    public void draw(GraphicsContext g2, int playerx, int playery, int screenx, int screeny){
         int col=0;
         int row=0;
-        int x=0;
-        int y=0;
 
-        while(col<16 && row <12){
-            int titlenum= mapTileNum[col][row];
+        while(col<32 && row <17){
+            int titlenum= mapTileNum[row][col];
 
-            g2.drawImage(tile[titlenum].image,x,y,48,48);
+            int worldX= col*48;
+            int worldY= row*48;
+            int screenX= worldX-playerx+screenx;
+            int screenY= worldY-playery+screeny;
+
+            if(worldX+48> playerx-screenx &&worldX-48< playerx+screenx
+                    && worldY+48 >playery-screeny &&worldY -48<playery+screeny ){
+                g2.drawImage(tile[titlenum].image,screenX,screenY,48,48);
+            }
             col++;
-            x+=48;
 
-            if(col== 16){
+            if(col==32){
                 col=0;
-                x=0;
                 row++;
-                y+=48;
             }
         }
     }
