@@ -6,5 +6,5 @@ public class Tile {
 
     public Image image;
 
-    public  boolean collion =false;
+    public  boolean collision =false;
 }

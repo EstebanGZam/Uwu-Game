@@ -14,13 +14,17 @@ public class TileManager {
 
     int mapTileNum [][];
 
+    public  int maxWorldCol;
+    public int maxWorldRow ;
 
-    public TileManager(GraphicsContext gr){
+
+    public TileManager(GraphicsContext gr , int row,int col){
 
         this.gr=gr;
-
+        this.maxWorldCol=col;
+        this.maxWorldRow=row;
         tile = new Tile[10];
-        mapTileNum = new int[17][32];
+        mapTileNum = new int[row][col];
         getTitleImage();
         loadGame();
     }
@@ -65,12 +69,15 @@ public class TileManager {
 
         tile[7]= new Tile();
         tile[7].image =new Image(x4.toURI().toString());
+        tile[7].collision= true;
 
         tile[8]= new Tile();
         tile[8].image =new Image(x5.toURI().toString());
+        tile[8].collision= true;
 
         tile[9]= new Tile();
         tile[9].image =new Image(x7.toURI().toString());
+        tile[9].collision= true;
 
 
 
@@ -85,10 +92,10 @@ public class TileManager {
             int col=0;
             int row=0;
 
-            while(col<32&& row<17){
+            while(col<maxWorldCol&& row<maxWorldRow){
 
                 String line =reader.readLine();
-                while (col< 32){
+                while (col< maxWorldCol){
                     String nume[]=line.split(" ");
 
                     int num = Integer.parseInt(nume[col]);
@@ -96,7 +103,7 @@ public class TileManager {
                     mapTileNum[row][col] =num;
                     col++;
                 }
-                if(col==32){
+                if(col==maxWorldCol){
                     col=0;
                     row++;
                 }
@@ -112,7 +119,7 @@ public class TileManager {
         int col=0;
         int row=0;
 
-        while(col<32 && row <17){
+        while(col<maxWorldCol && row <maxWorldRow){
             int titlenum= mapTileNum[row][col];
 
             int worldX= col*48;
@@ -122,11 +129,12 @@ public class TileManager {
 
             if(worldX+48> playerx-screenx &&worldX-48< playerx+screenx
                     && worldY+48 >playery-screeny &&worldY -48<playery+screeny ){
+
                 g2.drawImage(tile[titlenum].image,screenX,screenY,48,48);
             }
             col++;
 
-            if(col==32){
+            if(col==maxWorldCol){
                 col=0;
                 row++;
             }

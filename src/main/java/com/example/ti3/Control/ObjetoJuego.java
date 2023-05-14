@@ -2,6 +2,7 @@ package com.example.ti3.Control;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public abstract class ObjetoJuego {
 
@@ -19,7 +20,9 @@ public abstract class ObjetoJuego {
     private  int spriteNum=1;
 
     private String direction;
+    private Rectangle are;
 
+    private boolean collisionOn=false;
 
     public abstract void print(GraphicsContext grafics);
 

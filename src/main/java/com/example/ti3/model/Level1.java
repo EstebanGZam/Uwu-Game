@@ -1,6 +1,7 @@
 package com.example.ti3.model;
 
 import com.example.ti3.Control.Player;
+import com.example.ti3.Control.Screen;
 import com.example.ti3.Control.TileManager;
 import com.example.ti3.Main;
 import javafx.event.EventHandler;
@@ -18,21 +19,12 @@ import java.util.ResourceBundle;
 
 public class Level1 extends Thread  implements Initializable   {
 
-    public final int originTileSize= 16;
-    public final int scale= 3;
 
-    public final int tilesSize=48;
 
-    public final int maxScreenCol =16;
-    public final int maxScreenRow =12;
-
-    public final int screenWidth =tilesSize*maxScreenCol;
-    public final int screenHight =tilesSize*maxScreenRow;
-
-    public final int maxWorldCol =50;
-    public final int maxWorldRow =50;
-    public final int worldwith =2400;
-    public final int worldhight =2400;
+    public final int maxWorldCol =44;
+    public final int maxWorldRow =30;
+    public final int worldwith = Screen.tilesSize *maxWorldCol;//1536
+    public final int worldhight =Screen.tilesSize*maxWorldRow;//816
 
     public Canvas canvas;
 
@@ -41,7 +33,7 @@ public class Level1 extends Thread  implements Initializable   {
     private GraphicsContext g;
     Thread game;
 
-    TileManager tile=new TileManager(g);
+    TileManager tile=new TileManager(g,maxWorldRow,maxWorldCol);
 
     private KeyCode keyPressed;
 
@@ -82,9 +74,11 @@ public class Level1 extends Thread  implements Initializable   {
 
     public void paintComponent(GraphicsContext g){
         g = canvas.getGraphicsContext2D();
+        g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        g.setFill(Color.BLACK);
+        g.fillRect(0,0,768,576);
         tile.draw(g,player.getWorldx(),player.getWorldy(),player.ScreenX,player.ScreenY);
         player.print(g);
-        g.closePath();
 
     }
 

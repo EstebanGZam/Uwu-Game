@@ -39,8 +39,8 @@ public class Player extends ObjetoJuego {
 
 
     public void setDefault(){
-        setWorldx(100*4);
-        setWorldy(100*4);
+        setWorldx(100*4);  //poscion de inicio del jugagor
+        setWorldy(100*4);  //posicion de inicio del jugador
         setLifes(3);
         setSpeed(4);
         setDirection("down");
@@ -132,6 +132,7 @@ public class Player extends ObjetoJuego {
                 }
                 break;
         }
+      //  g.drawImage(image,ScreenX,ScreenY,768,560);
         g.drawImage(image,ScreenX,ScreenY,48,48);
     }
 
