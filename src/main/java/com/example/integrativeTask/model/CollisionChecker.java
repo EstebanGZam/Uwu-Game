@@ -45,7 +45,7 @@ public class CollisionChecker {
 				}
 			}
 			case "right" -> {
-				rightCol = (rightWorldY - ob.getSpeed()) / (48);
+				rightCol = (rightWorldY + ob.getSpeed()) / (48);
 				tileNum1 = tile.getMapTileNum()[rightCol][topRow];
 				tileNum2 = tile.getMapTileNum()[rightCol][bottomRow];
 				if (tile.getTile()[tileNum1].collision || tile.getTile()[tileNum2].collision) {

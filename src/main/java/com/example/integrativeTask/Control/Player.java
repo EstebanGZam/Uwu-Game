@@ -33,7 +33,7 @@ public class Player extends GameObject {
 
 
 	public void setDefault() {
-		setWorldX(100 * 4);  //poscion de inicio del jugagor
+		setWorldX(100 * 4);  //posicion de inicio del jugagor
 		setWorldY(100 * 4);  //posicion de inicio del jugador
 		setLives(3);
 		setSpeed(4);

@@ -6,7 +6,6 @@ import com.example.integrativeTask.Control.TileManager;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
@@ -24,18 +23,16 @@ public class Level1 extends Thread implements Initializable {
 
 	int fps = 60;
 
-	private GraphicsContext g;
+	private GraphicsContext graphicsContext;
 	Thread game;
 
-	TileManager tile = new TileManager(g, maxWorldRow, maxWorldCol);
-
-	private KeyCode keyPressed;
+	TileManager tile = new TileManager(graphicsContext, maxWorldRow, maxWorldCol, "src\\main\\java\\com\\example\\integrativeTask\\level-1.txt");
 
 	CollisionChecker collisionChecker = new CollisionChecker();
 
 	KeyHandler keyHandler = new KeyHandler();
 
-	Player player = new Player("", 100, 100, 4, 3, g, keyHandler);
+	Player player = new Player("", 100, 100, 4, 3, graphicsContext, keyHandler);
 
 	@Override
 	public void run() {
@@ -45,7 +42,7 @@ public class Level1 extends Thread implements Initializable {
 
 			update();
 
-			paintComponent(g);
+			paintComponent(graphicsContext);
 
 			try {
 				double remaingingTime = nextDraw - System.nanoTime();

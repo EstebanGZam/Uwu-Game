@@ -15,10 +15,11 @@ public class TileManager {
 
 	public int maxWorldCol;
 	public int maxWorldRow;
+	private String t;
 
 
-	public TileManager(GraphicsContext gr, int row, int col) {
-
+	public TileManager(GraphicsContext gr, int row, int col, String t) {
+		this.t = t;
 		this.gr = gr;
 		this.maxWorldCol = col;
 		this.maxWorldRow = row;
@@ -113,22 +114,22 @@ public class TileManager {
 		}
 	}
 
-	public void draw(GraphicsContext g2, int playerx, int playery, int screenx, int screeny) {
+	public void draw(GraphicsContext g2, int playerX, int playerY, int screenX, int screenY) {
 		int col = 0;
 		int row = 0;
 
 		while (col < maxWorldCol && row < maxWorldRow) {
-			int titlenum = mapTileNum[row][col];
+			int titleNum = mapTileNum[row][col];
 
 			int worldX = col * 48;
 			int worldY = row * 48;
-			int screenX = worldX - playerx + screenx;
-			int screenY = worldY - playery + screeny;
+			int screenInX = worldX - playerX + screenX;
+			int screenInY = worldY - playerY + screenY;
 
-			if (worldX + 48 > playerx - screenx && worldX - 48 < playerx + screenx
-					&& worldY + 48 > playery - screeny && worldY - 48 < playery + screeny) {
+			if (worldX + 48 > playerX - screenX && worldX - 48 < playerX + screenX
+					&& worldY + 48 > playerY - screenY && worldY - 48 < playerY + screenY) {
 
-				g2.drawImage(tile[titlenum].image, screenX, screenY, 48, 48);
+				g2.drawImage(tile[titleNum].image, screenInX, screenInY, 48, 48);
 			}
 			col++;
 
