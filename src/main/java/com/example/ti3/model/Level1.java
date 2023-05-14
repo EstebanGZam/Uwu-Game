@@ -37,6 +37,8 @@ public class Level1 extends Thread  implements Initializable   {
 
     private KeyCode keyPressed;
 
+    CollisionChecker collisonChecker = new CollisionChecker();
+
     KeyHandler keyHandler= new KeyHandler();
 
     Player player = new Player("",100,100,4,3,g,keyHandler);
@@ -69,7 +71,7 @@ public class Level1 extends Thread  implements Initializable   {
     }
 
     public void update(){
-      player.mover();
+      player.mover(collisonChecker,tile);
     }
 
     public void paintComponent(GraphicsContext g){

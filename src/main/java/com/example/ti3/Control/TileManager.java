@@ -69,11 +69,11 @@ public class TileManager {
 
         tile[7]= new Tile();
         tile[7].image =new Image(x4.toURI().toString());
-        tile[7].collision= true;
+
 
         tile[8]= new Tile();
         tile[8].image =new Image(x5.toURI().toString());
-        tile[8].collision= true;
+
 
         tile[9]= new Tile();
         tile[9].image =new Image(x7.toURI().toString());
@@ -141,4 +141,35 @@ public class TileManager {
         }
     }
 
+    public Tile[] getTile() {
+        return tile;
+    }
+
+    public void setTile(Tile[] tile) {
+        this.tile = tile;
+    }
+
+    public int[][] getMapTileNum() {
+        return mapTileNum;
+    }
+
+    public void setMapTileNum(int[][] mapTileNum) {
+        this.mapTileNum = mapTileNum;
+    }
+
+    public int getMaxWorldCol() {
+        return maxWorldCol;
+    }
+
+    public void setMaxWorldCol(int maxWorldCol) {
+        this.maxWorldCol = maxWorldCol;
+    }
+
+    public int getMaxWorldRow() {
+        return maxWorldRow;
+    }
+
+    public void setMaxWorldRow(int maxWorldRow) {
+        this.maxWorldRow = maxWorldRow;
+    }
 }

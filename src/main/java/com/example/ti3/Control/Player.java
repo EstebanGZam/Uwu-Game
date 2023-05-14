@@ -1,5 +1,6 @@
 package com.example.ti3.Control;
 
+import com.example.ti3.model.CollisionChecker;
 import com.example.ti3.model.KeyHandler;
 import com.example.ti3.model.Level1;
 import javafx.scene.canvas.Canvas;
@@ -28,11 +29,16 @@ public class Player extends ObjetoJuego {
 
 
 
+
     public Player(String image, int x, int y, int speed, int lifes,GraphicsContext gr,KeyHandler keyHandler) {
         super(image, x, y, speed);
         this.gr=gr;
         this.keyHandler=keyHandler;
         this.lifes = lifes;
+        getArea().x=8;
+        getArea().y=16;
+        getArea().width=32;
+        getArea().height=32;
         setDefault();
         getPlayerImage();
     }
@@ -137,22 +143,43 @@ public class Player extends ObjetoJuego {
     }
 
     @Override
-    public void mover() {
+    public void mover(CollisionChecker collisionChecker ,TileManager tile) {
         if(keyHandler.upPresed ||keyHandler.downPressed||keyHandler.leftPressed
                 ||keyHandler.rightPressed){
             if(keyHandler.upPresed){
                 setDirection("up");
-                setWorldy(getWorldy()-getSpeed());
+
             }else if(keyHandler.downPressed){
                 setDirection("down");
-                setWorldy(getWorldy()+getSpeed());
+
             }else if(keyHandler.leftPressed){
                 setDirection("left");
-                setWorldx(getWorldx()-getSpeed());
+
             }else if(keyHandler.rightPressed){
                 setDirection("right");
-                setWorldx(getWorldx()+getSpeed());
             }
+
+            setCollisionOn(false);
+            collisionChecker.checkTitle(this, tile);
+
+            if(!isCollisionOn()){
+                switch(getDirection()){
+                    case "up":
+                        setWorldy(getWorldy()-getSpeed());
+                        break;
+                    case "down":
+                        setWorldy(getWorldy()+getSpeed());
+                        break;
+                    case "left":
+                        setWorldx(getWorldx()-getSpeed());
+                        break;
+                    case "right":
+                        setWorldx(getWorldx()+getSpeed());
+                        break;
+
+                }
+            }
+
             setSpriteCounter(getSpriteCounter()+1);
 
             if(getSpriteCounter()>10){

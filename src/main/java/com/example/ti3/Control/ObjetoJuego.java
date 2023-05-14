@@ -1,8 +1,11 @@
 package com.example.ti3.Control;
 
+import com.example.ti3.model.CollisionChecker;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
+
+import java.awt.*;
+
 
 public abstract class ObjetoJuego {
 
@@ -20,15 +23,16 @@ public abstract class ObjetoJuego {
     private  int spriteNum=1;
 
     private String direction;
-    private Rectangle are;
+    private Rectangle area;
 
     private boolean collisionOn=false;
 
     public abstract void print(GraphicsContext grafics);
 
-    public abstract void mover();
+    public abstract void mover(CollisionChecker collisionChecker, TileManager tile);
 
     public ObjetoJuego(String image, int x, int y, int speed) {
+        area = new Rectangle();
         this.image = image;
         this.Worldx = x;
         this.Worldy = y;
@@ -187,5 +191,22 @@ public abstract class ObjetoJuego {
 
     public void setSpriteNum(int spriteNum) {
         this.spriteNum = spriteNum;
+    }
+
+
+    public Rectangle getArea() {
+        return area;
+    }
+
+    public void setArea(Rectangle area) {
+        this.area = area;
+    }
+
+    public boolean isCollisionOn() {
+        return collisionOn;
+    }
+
+    public void setCollisionOn(boolean collisionOn) {
+        this.collisionOn = collisionOn;
     }
 }
