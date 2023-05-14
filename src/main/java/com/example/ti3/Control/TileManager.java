@@ -17,9 +17,11 @@ public class TileManager {
     public  int maxWorldCol;
     public int maxWorldRow ;
 
+    String t;
 
-    public TileManager(GraphicsContext gr , int row,int col){
 
+    public TileManager(GraphicsContext gr , int row,int col, String t) {
+        this.t=t;
         this.gr=gr;
         this.maxWorldCol=col;
         this.maxWorldRow=row;
@@ -74,7 +76,6 @@ public class TileManager {
         tile[8]= new Tile();
         tile[8].image =new Image(x5.toURI().toString());
 
-
         tile[9]= new Tile();
         tile[9].image =new Image(x7.toURI().toString());
         tile[9].collision= true;
@@ -85,7 +86,7 @@ public class TileManager {
 
     public void loadGame(){
         try {
-            File File= new File("src/main/java/com/example/ti3/level1.txt");
+            File File= new File(t);
             FileInputStream i= new FileInputStream(File);
             BufferedReader reader = new BufferedReader(new InputStreamReader(i));
 

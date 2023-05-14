@@ -33,9 +33,8 @@ public class Level1 extends Thread  implements Initializable   {
     private GraphicsContext g;
     Thread game;
 
-    TileManager tile=new TileManager(g,maxWorldRow,maxWorldCol);
+    TileManager tile=new TileManager(g,maxWorldRow,maxWorldCol,"src/main/java/com/example/ti3/level1.txt");
 
-    private KeyCode keyPressed;
 
     CollisionChecker collisonChecker = new CollisionChecker();
 
