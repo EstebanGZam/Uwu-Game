@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public class Tile {
 
-    private Image image;
+    public Image image;
 
     public  boolean collion =false;
 }

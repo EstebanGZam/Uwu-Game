@@ -1,6 +1,7 @@
 package com.example.ti3.model;
 
 import com.example.ti3.Control.Player;
+import com.example.ti3.Control.TileManager;
 import com.example.ti3.Main;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -22,6 +23,8 @@ public class Level1 extends Thread  implements Initializable   {
 
     private GraphicsContext g;
     Thread game;
+
+    TileManager tile=new TileManager(g);
 
     private KeyCode keyPressed;
 
@@ -62,7 +65,7 @@ public class Level1 extends Thread  implements Initializable   {
 
     public void paintComponent(GraphicsContext g){
         g = canvas.getGraphicsContext2D();
-
+        tile.draw(g);
         player.print(g);
         g.closePath();
 
