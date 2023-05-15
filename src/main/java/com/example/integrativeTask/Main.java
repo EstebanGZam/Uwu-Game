@@ -9,25 +9,23 @@ import java.io.IOException;
 
 public class Main extends Application {
 	@Override
-	public void start(Stage stage) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Menu-1.fxml"));
-		Scene scene = new Scene(fxmlLoader.load(), 768, 576);
-		stage.setTitle("Icesi Games");
-		stage.setScene(scene);
-		stage.show();
+	public void start(Stage stage) {
+		FXMLLoader fxmlLoader = renderView("main-view.fxml", "Uwu game");
 	}
 
-	public static void showWindow(String fxml) {
-		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
-		Scene scene;
+	public static FXMLLoader renderView(String fxml, String title) {
+		FXMLLoader fxmlLoader = null;
 		try {
-			scene = new Scene(fxmlLoader.load(), 768, 576);
+			fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));
+			Scene scene = new Scene(fxmlLoader.load(), 768, 576);
 			Stage stage = new Stage();
+			stage.setTitle(title);
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
+		return fxmlLoader;
 	}
 
 	public static void hideWindow(Stage stage) {

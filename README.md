@@ -1,6 +1,6 @@
 ![ICESI University Logo](https://www.icesi.edu.co/launiversidad/images/La_universidad/logo_icesi.png)
 
-# Nuclear Throne
+# Uwu game
 
 ### **Project developers** ✒️
 

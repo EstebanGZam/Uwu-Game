@@ -1,4 +1,4 @@
-package com.example.integrativeTask.model;
+package com.example.integrativeTask.Controller;
 
 import com.example.integrativeTask.Control.Music;
 import javafx.event.ActionEvent;
@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Menu2 implements Initializable {
+public class Menu2Controller implements Initializable {
 
 	public TextField up;
 	public TextField down;
@@ -44,11 +44,8 @@ public class Menu2 implements Initializable {
 
 
 	public void soundtrack() {
-
-		//File file = new File("C:\\Users\\shern\\OneDrive\\Documentos\\clases\\Semestre3\\ApoII\\TI3\\src\\main\\java\\com\\example\\integrativeTask\\com.example.integrativeTask.image\\u.mpeg");
 		music = new Music("src\\main\\java\\com\\example\\integrativeTask\\com.example.integrativeTask.image\\u.mpeg", true);
 		music.play();
-
 	}
 
 	public void print() {

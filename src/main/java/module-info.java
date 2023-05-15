@@ -10,5 +10,7 @@ module com.example.integrativeTask {
 	exports com.example.integrativeTask;
 	exports com.example.integrativeTask.Control;
 	opens com.example.integrativeTask.Control to javafx.fxml;
+	exports com.example.integrativeTask.Controller;
+	opens com.example.integrativeTask.Controller to javafx.fxml;
 
 }

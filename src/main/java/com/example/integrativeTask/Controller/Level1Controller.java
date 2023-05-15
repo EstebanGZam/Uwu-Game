@@ -1,8 +1,10 @@
-package com.example.integrativeTask.model;
+package com.example.integrativeTask.Controller;
 
 import com.example.integrativeTask.Control.Player;
 import com.example.integrativeTask.Control.Screen;
 import com.example.integrativeTask.Control.TileManager;
+import com.example.integrativeTask.model.CollisionChecker;
+import com.example.integrativeTask.model.KeyHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,7 +14,7 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Level1 extends Thread implements Initializable {
+public class Level1Controller extends Thread implements Initializable {
 
 	public final int maxWorldCol = 44;
 	public final int maxWorldRow = 30;
