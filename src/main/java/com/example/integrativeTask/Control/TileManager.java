@@ -84,7 +84,7 @@ public class TileManager {
 
 	public void loadGame() {
 		try {
-			File File = new File("src\\main\\java\\com\\example\\integrativeTask\\Level-1.txt");
+			File File = new File(t);
 			FileInputStream i = new FileInputStream(File);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(i));
 

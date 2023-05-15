@@ -1,6 +1,5 @@
 package com.example.integrativeTask.model;
 
-import com.example.integrativeTask.Control.Music;
 import com.example.integrativeTask.Control.Player;
 import com.example.integrativeTask.Control.Screen;
 import com.example.integrativeTask.Control.TileManager;
@@ -14,20 +13,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Level3 extends Thread implements Initializable {
-
     public final int maxWorldCol = 44;
     public final int maxWorldRow = 30;
     public final int worldWidth = Screen.tilesSize * maxWorldCol;//1536
     public final int worldHeight = Screen.tilesSize * maxWorldRow;//816
 
     public Canvas canvas;
-    private Music music;
+
     int fps = 60;
 
     private GraphicsContext graphicsContext;
     Thread game;
 
-    TileManager tile = new TileManager(graphicsContext, maxWorldRow, maxWorldCol, "src\\main\\java\\com\\example\\integrativeTask\\Level-3.txt");
+    TileManager tile = new TileManager(graphicsContext, maxWorldRow, maxWorldCol, "src\\main\\java\\com\\example\\integrativeTask\\level-3.txt");
 
     CollisionChecker collisionChecker = new CollisionChecker();
 
@@ -64,11 +62,6 @@ public class Level3 extends Thread implements Initializable {
         player.mover(collisionChecker, tile);
     }
 
-    public void soundtrack() {
-        music = new Music("src\\main\\java\\com\\example\\integrativeTask\\image\\u.mpeg", true);
-        music.play();
-    }
-
     public void paintComponent(GraphicsContext g) {
         g = canvas.getGraphicsContext2D();
         g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -84,7 +77,6 @@ public class Level3 extends Thread implements Initializable {
         game = new Thread(this);
         game.start();
         updateStatus();
-        soundtrack();
     }
 
     public void updateStatus() {
@@ -100,5 +92,6 @@ public class Level3 extends Thread implements Initializable {
             keyHandler.keyReleased(keyEvent);
         });
     }
+
 
 }
