@@ -14,8 +14,8 @@ public class Player extends GameObject {
 
 	GraphicsContext gr;
 
-	public final int ScreenX = 768 / 2 - (48 / 2);
-	public final int ScreenY = 560 / 2 - (48 / 2);
+	private final int ScreenX = 768 / 2 - (48 / 2);
+	private final int ScreenY = 560 / 2 - (48 / 2);
 
 	public Player(int x, int y, int speed, int lives, GraphicsContext gr) {
 		super(x, y, speed);
@@ -170,5 +170,11 @@ public class Player extends GameObject {
 		this.lives = lives;
 	}
 
+	public int getScreenX() {
+		return ScreenX;
+	}
 
+	public int getScreenY() {
+		return ScreenY;
+	}
 }

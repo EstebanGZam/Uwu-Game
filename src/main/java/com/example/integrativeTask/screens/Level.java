@@ -33,7 +33,7 @@ public class Level extends BaseScreen {
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		graphicsContext.setFill(Color.BLACK);
 		graphicsContext.fillRect(0, 0, Screen.SCREEN_WIDTH, Screen.SCREEN_HEIGHT);
-		tile.draw(graphicsContext, player.getWorldX(), player.getWorldY(), player.ScreenX, player.ScreenY);
+		tile.draw(graphicsContext, player.getWorldX(), player.getWorldY(), player.getScreenX(), player.getScreenY());
 		player.print(graphicsContext);
 	}
 

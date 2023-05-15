@@ -3,10 +3,9 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="576.0" prefWidth="768.0"
-            maxHeight="576.0" maxWidth="768.0"
-            xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.integrativeTask.controller.MainController">
+<Pane prefHeight="576.0" prefWidth="768.0"
+      xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.integrativeTask.controller.MainController">
     <Canvas fx:id="canvas" height="576.0" width="768.0"/>
-</AnchorPane>
+</Pane>

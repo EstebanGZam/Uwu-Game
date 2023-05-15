@@ -8,9 +8,7 @@ import javafx.scene.image.Image;
 import java.io.*;
 
 public class TileManager {
-	public static final String TILES_DIR = MainController.MAIN_RESOURCES_PATH + "\\tiles-sprites";
-	private final String[] tilesImagesRelativePaths = {"\\grass.png", "\\esquinaDeSu.png", "\\esquinaIzSu.png", "\\parteDEINF.png", "\\parteIZINF.png",
-			"\\parteINF.png", "\\parteSu.png", "\\muro.png", "\\muroDE.png", "\\muroINTERIOR.png"};
+	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\tiles-sprites";
 	private final int TILES_AMOUNT = 10;
 
 	private Tile[] tile;
@@ -35,7 +33,7 @@ public class TileManager {
 	public void initializeTilesImages() {
 
 		for (int i = 0; i < TILES_AMOUNT; i++) {
-			tile[i] = new Tile(getTileImage(tilesImagesRelativePaths[i]));
+			tile[i] = new Tile(getTileImage("\\tile_" + i + ".png"));
 		}
 
 		tile[7].setCollision(true);
@@ -45,7 +43,7 @@ public class TileManager {
 	}
 
 	private Image getTileImage(String relativePath) {
-		return new Image(TILES_DIR + relativePath);
+		return new Image(TILES_PATH + relativePath);
 	}
 
 	public void loadGame() {

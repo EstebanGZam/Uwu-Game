@@ -1,6 +1,5 @@
 package com.example.integrativeTask.controller;
 
-import com.example.integrativeTask.Main;
 import com.example.integrativeTask.control.Music;
 import com.example.integrativeTask.control.Player;
 import com.example.integrativeTask.screens.Level;
@@ -47,6 +46,7 @@ public class MainController implements Initializable {
 		soundtrack();
 		printInCanvas();
 		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player));
+		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player));
 		initEvents();
 	}
 
