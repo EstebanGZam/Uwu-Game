@@ -22,7 +22,7 @@ public abstract class GameObject {
 	private int spriteNum = 1;
 
 	private String direction;
-	private Rectangle area;
+	public Rectangle area;
 
 	private boolean collisionOn = false;
 
