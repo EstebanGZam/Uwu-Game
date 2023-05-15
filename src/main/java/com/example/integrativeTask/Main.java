@@ -28,7 +28,7 @@ public class Main extends Application {
 		return fxmlLoader;
 	}
 
-	public static void hideWindow(Stage stage) {
+	public static void closeWindow(Stage stage) {
 		stage.close();
 	}
 

@@ -4,7 +4,23 @@ import javafx.scene.image.Image;
 
 public class Tile {
 
-    public Image image;
+	private final Image image;
 
-    public  boolean collision = false;
+	private boolean collision = false;
+
+    public Tile(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public boolean isCollision() {
+        return collision;
+    }
+
+    public void setCollision(boolean collision) {
+        this.collision = collision;
+    }
 }

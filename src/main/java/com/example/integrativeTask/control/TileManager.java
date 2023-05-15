@@ -7,10 +7,12 @@ import javafx.scene.image.Image;
 import java.io.*;
 
 public class TileManager {
-	public static final String SPRITE_DIR = MainController.MAIN_PATH + "\\RPGW_Caves_v2.1\\";
+	public static final String TILES_DIR = MainController.MAIN_PATH + "\\RPGW_Caves_v2.1";
+	private final String[] tilesImagesRelativePaths = {"\\grass.png", "\\esquinaDeSu.png", "\\esquinaIzSu.png", "\\parteDEINF.png", "\\parteIZINF.png",
+			"\\parteINF.png", "\\parteSu.png", "\\muro.png", "\\muroDE.png", "\\muroINTERIOR.png"};
 	private final int TILES_AMOUNT = 10;
 
-	private GraphicsContext gr;
+	private GraphicsContext graphicsContext;
 
 	private Tile[] tile;
 
@@ -18,44 +20,38 @@ public class TileManager {
 
 	public int maxWorldCol;
 	public int maxWorldRow;
-	private String stagePath;
+	private final String stagePath;
 
 
-	public TileManager(GraphicsContext gr, int row, int col, String stagePath) {
+	public TileManager(GraphicsContext graphicsContext, int rows, int columns, String stagePath) {
 		this.stagePath = stagePath;
-		this.gr = gr;
-		this.maxWorldCol = col;
-		this.maxWorldRow = row;
+		this.graphicsContext = graphicsContext;
+		this.maxWorldCol = columns;
+		this.maxWorldRow = rows;
 		tile = new Tile[TILES_AMOUNT];
-		mapTileNum = new int[row][col];
-		getTitleImage();
+		mapTileNum = new int[rows][columns];
+		initializeTilesImages();
 		loadGame();
 	}
 
-	public void getTitleImage() {
+	public void initializeTilesImages() {
+
 		for (int i = 0; i < TILES_AMOUNT; i++) {
-			tile[i] = new Tile();
+			tile[i] = new Tile(getTileImage(tilesImagesRelativePaths[i]));
 		}
+		tile[9].setCollision(true);
 
-		tile[0].image = new Image(SPRITE_DIR + "grass.png");
-		tile[1].image = new Image(SPRITE_DIR + "esquinaDeSu.png");
-		tile[2].image = new Image(SPRITE_DIR + "esquinaIzSu.png");
-		tile[3].image = new Image(SPRITE_DIR + "parteDEINF.png");
-		tile[4].image = new Image(SPRITE_DIR + "parteIZINF.png");
-		tile[5].image = new Image(SPRITE_DIR + "parteINF.png");
-		tile[6].image = new Image(SPRITE_DIR + "parteSu.png");
-		tile[7].image = new Image(SPRITE_DIR + "muro.png");
-		tile[8].image = new Image(SPRITE_DIR + "muroDE.png");
-		tile[9].image = new Image(SPRITE_DIR + "muroINTERIOR.png");
-		tile[9].collision = true;
+	}
 
+	private Image getTileImage(String relativePath) {
+		return new Image(TILES_DIR + relativePath);
 	}
 
 	public void loadGame() {
 		try {
 			File File = new File(stagePath);
-			FileInputStream i = new FileInputStream(File);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(i));
+			FileInputStream fis = new FileInputStream(File);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
 
 			int col = 0;
 			int row = 0;
@@ -64,8 +60,8 @@ public class TileManager {
 
 				String line = reader.readLine();
 				while (col < maxWorldCol) {
-					String nume[] = line.split(" ");
 
+					String[] nume = line.split(" ");
 					int num = Integer.parseInt(nume[col]);
 
 					mapTileNum[row][col] = num;
@@ -83,7 +79,7 @@ public class TileManager {
 		}
 	}
 
-	public void draw(GraphicsContext g2, int playerX, int playerY, int screenX, int screenY) {
+	public void draw(GraphicsContext graphicsContext, int playerX, int playerY, int screenX, int screenY) {
 		int col = 0;
 		int row = 0;
 
@@ -98,7 +94,7 @@ public class TileManager {
 			if (worldX + 48 > playerX - screenX && worldX - 48 < playerX + screenX
 					&& worldY + 48 > playerY - screenY && worldY - 48 < playerY + screenY) {
 
-				g2.drawImage(tile[titleNum].image, screenInX, screenInY, 48, 48);
+				graphicsContext.drawImage(tile[titleNum].getImage(), screenInX, screenInY, 48, 48);
 			}
 			col++;
 

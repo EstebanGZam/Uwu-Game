@@ -29,13 +29,13 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		start();
-		printInCanvas();
-		updateState();
 	}
 
 	private void start() {
 		graphics = canvas.getGraphicsContext2D();
 		soundtrack();
+		printInCanvas();
+		updateState();
 	}
 
 
@@ -59,7 +59,7 @@ public class MainController implements Initializable {
 		canvas.setOnKeyPressed(keyEvent -> {
 			if (keyEvent.getCode().equals(KeyCode.ENTER)) {
 				music.stop();
-				Main.hideWindow((Stage) canvas.getScene().getWindow());
+				Main.closeWindow((Stage) canvas.getScene().getWindow());
 				Main.renderView("level-3-view.fxml", "Level 3");
 			}
 		});
