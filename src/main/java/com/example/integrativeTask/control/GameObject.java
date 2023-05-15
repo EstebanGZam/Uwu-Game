@@ -6,33 +6,20 @@ import javafx.scene.image.Image;
 
 import java.awt.*;
 
-
 public abstract class GameObject {
 
-	private String image;
-
-	private int worldX;
-	private int worldY;
-
 	private Image up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
-	private int speed;
-
-	private int spriteCounter = 0;
-
-	private int spriteNum = 1;
-
+	private int worldX, worldY, speed, spriteCounter = 0, spriteNum = 1;
 	private String direction;
-	public Rectangle area;
-
-	private boolean collisionOn = false;
+	protected Rectangle area;
+	private boolean collisionOn;
 
 	public abstract void print(GraphicsContext graphicsContext);
 
 	public abstract void move(CollisionChecker collisionChecker, TileManager tile);
 
-	public GameObject(String image, int x, int y, int speed) {
+	public GameObject(int x, int y, int speed) {
 		area = new Rectangle();
-		this.image = image;
 		this.worldX = x;
 		this.worldY = y;
 		this.speed = speed;
@@ -187,10 +174,6 @@ public abstract class GameObject {
 
 	public Rectangle getArea() {
 		return area;
-	}
-
-	public void setArea(Rectangle area) {
-		this.area = area;
 	}
 
 	public boolean isCollisionOn() {

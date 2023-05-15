@@ -3,39 +3,47 @@ package com.example.integrativeTask.controller;
 import javafx.scene.input.KeyEvent;
 
 public class KeyHandler {
+	private static KeyHandler instance;
 
-	public boolean upPressed, downPressed, leftPressed, rightPressed;
-
-	public void keyPressed(KeyEvent e) {
-		if (e.getCode().toString() == "W") {
-			upPressed = true;
-		}
-		if (e.getCode().toString() == "S") {
-			downPressed = true;
-		}
-		if (e.getCode().toString() == "A") {
-			leftPressed = true;
-		}
-		if (e.getCode().toString() == "D") {
-			rightPressed = true;
-		}
-
+	public static KeyHandler getInstance() {
+		if (instance == null)
+			instance = new KeyHandler();
+		return instance;
 	}
 
-	public void keyReleased(KeyEvent e) {
-		if (e.getCode().toString() == "W") {
-			upPressed = false;
-		}
-		if (e.getCode().toString() == "S") {
-			downPressed = false;
-		}
-		if (e.getCode().toString() == "A") {
-			leftPressed = false;
-		}
-		if (e.getCode().toString() == "D") {
-			rightPressed = false;
-		}
+	private boolean upPressed, downPressed, leftPressed, rightPressed;
 
+	public void keyPressed(KeyEvent event) {
+		switch (event.getCode()) {
+			case W -> upPressed = true;
+			case S -> downPressed = true;
+			case A -> leftPressed = true;
+			case D -> rightPressed = true;
+		}
 	}
 
+	public void keyReleased(KeyEvent event) {
+		switch (event.getCode()) {
+			case W -> upPressed = false;
+			case S -> downPressed = false;
+			case A -> leftPressed = false;
+			case D -> rightPressed = false;
+		}
+	}
+
+	public boolean isUpPressed() {
+		return upPressed;
+	}
+
+	public boolean isDownPressed() {
+		return downPressed;
+	}
+
+	public boolean isLeftPressed() {
+		return leftPressed;
+	}
+
+	public boolean isRightPressed() {
+		return rightPressed;
+	}
 }

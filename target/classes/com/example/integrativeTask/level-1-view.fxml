@@ -6,6 +6,6 @@
 
 <AnchorPane prefHeight="576.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.integrativeTask.controller.Level1">
+            fx:controller="com.example.integrativeTask.controller.MainController">
     <Canvas fx:id="canvas" height="576.0" width="768.0"/>
 </AnchorPane>

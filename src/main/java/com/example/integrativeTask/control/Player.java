@@ -14,15 +14,12 @@ public class Player extends GameObject {
 
 	GraphicsContext gr;
 
-	KeyHandler keyHandler;
-
 	public final int ScreenX = 768 / 2 - (48 / 2);
 	public final int ScreenY = 560 / 2 - (48 / 2);
 
-	public Player(String image, int x, int y, int speed, int lives, GraphicsContext gr, KeyHandler keyHandler) {
-		super(image, x, y, speed);
+	public Player(int x, int y, int speed, int lives, GraphicsContext gr) {
+		super(x, y, speed);
 		this.gr = gr;
-		this.keyHandler = keyHandler;
 		this.lives = lives;
 		area = new Rectangle();
 		area.x = 7;
@@ -35,8 +32,8 @@ public class Player extends GameObject {
 
 
 	public void setDefault() {
-		setWorldX(100 * 4);  //posicion de inicio del jugagor
-		setWorldY(100 * 4);  //posicion de inicio del jugador
+		setWorldX(100 * 4);  // posicion de inicio del jugagor
+		setWorldY(100 * 4);  // posicion de inicio del jugador
 		setLives(3);
 		setSpeed(4);
 		setDirection("down");
@@ -125,44 +122,33 @@ public class Player extends GameObject {
 				}
 			}
 		}
-		//  g.drawImage(image,ScreenX,ScreenY,768,560);
 		graphicsContext.drawImage(image, ScreenX, ScreenY, 48, 48);
 	}
 
 	@Override
 	public void move(CollisionChecker collisionChecker, TileManager tile) {
-		if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed
-				|| keyHandler.rightPressed) {
-			if (keyHandler.upPressed) {
+		KeyHandler keyHandler = KeyHandler.getInstance();
+		if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
+				keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
+			if (keyHandler.isUpPressed()) {
 				setDirection("up");
-
-			} else if (keyHandler.downPressed) {
+			} else if (keyHandler.isDownPressed()) {
 				setDirection("down");
-
-			} else if (keyHandler.leftPressed) {
+			} else if (keyHandler.isLeftPressed()) {
 				setDirection("left");
-
 			} else {
 				setDirection("right");
 			}
 
 			setCollisionOn(false);
-			collisionChecker.checkTitle(this, tile);
+			collisionChecker.checkTile(this, tile);
 
-			if (isCollisionOn() == false) {
+			if (!isCollisionOn()) {
 				switch (getDirection()) {
-					case "up":
-						setWorldY(getWorldY() - getSpeed());
-						break;
-					case "down":
-						setWorldY(getWorldY() + getSpeed());
-						break;
-					case "left":
-						setWorldX(getWorldX() - getSpeed());
-						break;
-					case "right":
-						setWorldX(getWorldX() + getSpeed());
-						break;
+					case "up" -> setWorldY(getWorldY() - getSpeed());
+					case "down" -> setWorldY(getWorldY() + getSpeed());
+					case "left" -> setWorldX(getWorldX() - getSpeed());
+					case "right" -> setWorldX(getWorldX() + getSpeed());
 				}
 			}
 
@@ -178,10 +164,6 @@ public class Player extends GameObject {
 			}
 		}
 
-	}
-
-	public int getLives() {
-		return lives;
 	}
 
 	public void setLives(int lives) {

@@ -1,31 +1,29 @@
 package com.example.integrativeTask.control;
 
 import com.example.integrativeTask.controller.MainController;
+import com.example.integrativeTask.model.Tile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.io.*;
 
 public class TileManager {
-	public static final String TILES_DIR = MainController.MAIN_PATH + "\\RPGW_Caves_v2.1";
+	public static final String TILES_DIR = MainController.MAIN_RESOURCES_PATH + "\\tiles-sprites";
 	private final String[] tilesImagesRelativePaths = {"\\grass.png", "\\esquinaDeSu.png", "\\esquinaIzSu.png", "\\parteDEINF.png", "\\parteIZINF.png",
 			"\\parteINF.png", "\\parteSu.png", "\\muro.png", "\\muroDE.png", "\\muroINTERIOR.png"};
 	private final int TILES_AMOUNT = 10;
-
-	private GraphicsContext graphicsContext;
 
 	private Tile[] tile;
 
 	private int[][] mapTileNum;
 
-	public int maxWorldCol;
-	public int maxWorldRow;
+	private int maxWorldCol;
+	private int maxWorldRow;
 	private final String stagePath;
 
 
-	public TileManager(GraphicsContext graphicsContext, int rows, int columns, String stagePath) {
+	public TileManager(int rows, int columns, String stagePath) {
 		this.stagePath = stagePath;
-		this.graphicsContext = graphicsContext;
 		this.maxWorldCol = columns;
 		this.maxWorldRow = rows;
 		tile = new Tile[TILES_AMOUNT];
@@ -39,6 +37,9 @@ public class TileManager {
 		for (int i = 0; i < TILES_AMOUNT; i++) {
 			tile[i] = new Tile(getTileImage(tilesImagesRelativePaths[i]));
 		}
+
+		tile[7].setCollision(true);
+		tile[8].setCollision(true);
 		tile[9].setCollision(true);
 
 	}

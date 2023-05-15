@@ -4,8 +4,15 @@ import com.example.integrativeTask.control.GameObject;
 import com.example.integrativeTask.control.TileManager;
 
 public class CollisionChecker {
+	private static CollisionChecker instance;
 
-	public void checkTitle(GameObject ob, TileManager tile) {
+	public static CollisionChecker getInstance() {
+		if (instance == null)
+			instance = new CollisionChecker();
+		return instance;
+	}
+
+	public void checkTile(GameObject ob, TileManager tile) {
 
 		int leftWorldX = ob.getWorldX() + ob.getArea().x;
 		int rightWorldX = ob.getWorldX() + ob.getArea().x + ob.getArea().width;
@@ -20,38 +27,38 @@ public class CollisionChecker {
 		int tileNum1, tileNum2;
 
 		switch (ob.getDirection()) {
-			case "up" :
+			case "up" -> {
 				topRow = (TopWorldY - ob.getSpeed()) / (48);
 				tileNum1 = tile.getMapTileNum()[topRow][leftCol];
 				tileNum2 = tile.getMapTileNum()[topRow][rightCol];
 				if (tile.getTile()[tileNum1].isCollision() || tile.getTile()[tileNum2].isCollision()) {
 					ob.setCollisionOn(true);
 				}
-				break;
-			case "down" :
+			}
+			case "down" -> {
 				bottomRow = (BottomWorldY + ob.getSpeed()) / (48);
 				tileNum1 = tile.getMapTileNum()[bottomRow][leftCol];
 				tileNum2 = tile.getMapTileNum()[bottomRow][rightCol];
-				if (tile.getTile()[tileNum1].isCollision() == true|| tile.getTile()[tileNum2].isCollision() == true) {
+				if (tile.getTile()[tileNum1].isCollision() || tile.getTile()[tileNum2].isCollision()) {
 					ob.setCollisionOn(true);
 				}
-				break;
-			case "left" :
+			}
+			case "left" -> {
 				leftCol = (leftWorldX - ob.getSpeed()) / (48);
 				tileNum1 = tile.getMapTileNum()[topRow][leftCol];
 				tileNum2 = tile.getMapTileNum()[bottomRow][leftCol];
-				if (tile.getTile()[tileNum1].isCollision()  == true|| tile.getTile()[tileNum2].isCollision() == true) {
+				if (tile.getTile()[tileNum1].isCollision() || tile.getTile()[tileNum2].isCollision()) {
 					ob.setCollisionOn(true);
 				}
-				break;
-			case "right" :
+			}
+			case "right" -> {
 				rightCol = (rightWorldX + ob.getSpeed()) / (48);
 				tileNum1 = tile.getMapTileNum()[topRow][rightCol];
 				tileNum2 = tile.getMapTileNum()[bottomRow][rightCol];
-				if (tile.getTile()[tileNum1].isCollision()  == true|| tile.getTile()[tileNum2].isCollision() == true) {
+				if (tile.getTile()[tileNum1].isCollision() || tile.getTile()[tileNum2].isCollision()) {
 					ob.setCollisionOn(true);
 				}
-				break;
+			}
 		}
 	}
 
