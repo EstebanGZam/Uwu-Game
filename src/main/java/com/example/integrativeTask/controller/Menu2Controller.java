@@ -1,6 +1,6 @@
-package com.example.integrativeTask.Controller;
+package com.example.integrativeTask.controller;
 
-import com.example.integrativeTask.Control.Music;
+import com.example.integrativeTask.control.Music;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

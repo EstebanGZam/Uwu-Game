@@ -1,6 +1,6 @@
-package com.example.integrativeTask.Controller;
+package com.example.integrativeTask.controller;
 
-import com.example.integrativeTask.Control.Music;
+import com.example.integrativeTask.control.Music;
 import com.example.integrativeTask.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +17,7 @@ public class MainController implements Initializable {
 
 	public static String MAIN_PATH = System.getProperty("user.dir") + "\\src\\main\\java\\com\\example\\integrativeTask";
 	public static String IMAGES_PATH = MAIN_PATH + "\\image";
+	public static String AUDIO_PATH = MAIN_PATH + "\\audio";
 
 	@FXML
 	private Canvas canvas;
@@ -39,7 +40,7 @@ public class MainController implements Initializable {
 
 
 	public void soundtrack() {
-		music = new Music(IMAGES_PATH + "\\u.mpeg", true);
+		music = new Music(AUDIO_PATH + "\\u.mpeg", true);
 		music.play();
 	}
 

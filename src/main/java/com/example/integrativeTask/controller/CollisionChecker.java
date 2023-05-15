@@ -1,7 +1,7 @@
-package com.example.integrativeTask.model;
+package com.example.integrativeTask.controller;
 
-import com.example.integrativeTask.Control.GameObject;
-import com.example.integrativeTask.Control.TileManager;
+import com.example.integrativeTask.control.GameObject;
+import com.example.integrativeTask.control.TileManager;
 
 public class CollisionChecker {
 

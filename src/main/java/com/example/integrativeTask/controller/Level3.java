@@ -1,8 +1,8 @@
-package com.example.integrativeTask.model;
+package com.example.integrativeTask.controller;
 
-import com.example.integrativeTask.Control.Player;
-import com.example.integrativeTask.Control.Screen;
-import com.example.integrativeTask.Control.TileManager;
+import com.example.integrativeTask.control.Player;
+import com.example.integrativeTask.control.Screen;
+import com.example.integrativeTask.control.TileManager;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,7 +25,7 @@ public class Level3 extends Thread implements Initializable {
     private GraphicsContext graphicsContext;
     Thread game;
 
-    TileManager tile = new TileManager(graphicsContext, maxWorldRow, maxWorldCol, "src\\main\\java\\com\\example\\integrativeTask\\level-3.txt");
+    TileManager tile = new TileManager(graphicsContext, maxWorldRow, maxWorldCol, "src\\main\\java\\com\\example\\integrativeTask\\Level-3.txt");
 
     CollisionChecker collisionChecker = new CollisionChecker();
 
@@ -59,7 +59,7 @@ public class Level3 extends Thread implements Initializable {
     }
 
     public void update() {
-        player.mover(collisionChecker, tile);
+        player.move(collisionChecker, tile);
     }
 
     public void paintComponent(GraphicsContext g) {
@@ -92,6 +92,5 @@ public class Level3 extends Thread implements Initializable {
             keyHandler.keyReleased(keyEvent);
         });
     }
-
 
 }

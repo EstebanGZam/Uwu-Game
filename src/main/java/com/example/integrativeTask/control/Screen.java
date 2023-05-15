@@ -1,6 +1,4 @@
-package com.example.integrativeTask.Control;
-
-import com.example.integrativeTask.model.CollisionChecker;
+package com.example.integrativeTask.control;
 
 public class Screen {
 	//  Screen settings

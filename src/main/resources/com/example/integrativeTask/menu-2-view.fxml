@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="576.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.integrativeTask.Controller.Menu2Controller">
+            fx:controller="com.example.integrativeTask.controller.Menu2Controller">
     <Canvas fx:id="canvas" height="576.0" width="760.0"/>
     <TextField fx:id="up" layoutX="159.0" layoutY="78.0"/>
     <TextField fx:id="down" layoutX="159.0" layoutY="175.0"/>

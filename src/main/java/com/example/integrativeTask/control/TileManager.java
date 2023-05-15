@@ -1,6 +1,6 @@
-package com.example.integrativeTask.Control;
+package com.example.integrativeTask.control;
 
-import com.example.integrativeTask.Controller.MainController;
+import com.example.integrativeTask.controller.MainController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -18,11 +18,11 @@ public class TileManager {
 
 	public int maxWorldCol;
 	public int maxWorldRow;
-	private String t;
+	private String stagePath;
 
 
-	public TileManager(GraphicsContext gr, int row, int col, String t) {
-		this.t = t;
+	public TileManager(GraphicsContext gr, int row, int col, String stagePath) {
+		this.stagePath = stagePath;
 		this.gr = gr;
 		this.maxWorldCol = col;
 		this.maxWorldRow = row;
@@ -53,7 +53,7 @@ public class TileManager {
 
 	public void loadGame() {
 		try {
-			File File = new File("src\\main\\java\\com\\example\\integrativeTask\\Level-1.txt");
+			File File = new File(stagePath);
 			FileInputStream i = new FileInputStream(File);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(i));
 

@@ -1,10 +1,8 @@
-package com.example.integrativeTask.Controller;
+package com.example.integrativeTask.controller;
 
-import com.example.integrativeTask.Control.Player;
-import com.example.integrativeTask.Control.Screen;
-import com.example.integrativeTask.Control.TileManager;
-import com.example.integrativeTask.model.CollisionChecker;
-import com.example.integrativeTask.model.KeyHandler;
+import com.example.integrativeTask.control.Player;
+import com.example.integrativeTask.control.Screen;
+import com.example.integrativeTask.control.TileManager;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,7 +12,7 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Level1Controller extends Thread implements Initializable {
+public class Level1 extends Thread implements Initializable {
 
 	public final int maxWorldCol = 44;
 	public final int maxWorldRow = 30;
@@ -62,7 +60,7 @@ public class Level1Controller extends Thread implements Initializable {
 	}
 
 	public void update() {
-		player.mover(collisionChecker, tile);
+		player.move(collisionChecker, tile);
 	}
 
 	public void paintComponent(GraphicsContext g) {

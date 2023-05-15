@@ -1,4 +1,4 @@
-package com.example.integrativeTask.model;
+package com.example.integrativeTask.controller;
 
 import javafx.scene.input.KeyEvent;
 

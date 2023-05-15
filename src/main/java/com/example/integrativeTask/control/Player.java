@@ -1,7 +1,7 @@
-package com.example.integrativeTask.Control;
+package com.example.integrativeTask.control;
 
-import com.example.integrativeTask.model.CollisionChecker;
-import com.example.integrativeTask.model.KeyHandler;
+import com.example.integrativeTask.controller.CollisionChecker;
+import com.example.integrativeTask.controller.KeyHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -130,7 +130,7 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void mover(CollisionChecker collisionChecker, TileManager tile) {
+	public void move(CollisionChecker collisionChecker, TileManager tile) {
 		if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed
 				|| keyHandler.rightPressed) {
 			if (keyHandler.upPressed) {
@@ -151,16 +151,16 @@ public class Player extends GameObject {
 
 			if (isCollisionOn() == false) {
 				switch (getDirection()) {
-					case "up" :
-						setWorldY(getWorldY() - getSpeed()) ;
+					case "up":
+						setWorldY(getWorldY() - getSpeed());
 						break;
-					case "down" :
+					case "down":
 						setWorldY(getWorldY() + getSpeed());
 						break;
-					case "left" :
+					case "left":
 						setWorldX(getWorldX() - getSpeed());
 						break;
-					case "right" :
+					case "right":
 						setWorldX(getWorldX() + getSpeed());
 						break;
 				}

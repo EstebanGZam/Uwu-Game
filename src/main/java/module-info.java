@@ -5,12 +5,10 @@ module com.example.integrativeTask {
 	requires java.desktop;
 
 	opens com.example.integrativeTask to javafx.fxml;
-	exports com.example.integrativeTask.model;
-	opens com.example.integrativeTask.model to javafx.fxml;
 	exports com.example.integrativeTask;
-	exports com.example.integrativeTask.Control;
-	opens com.example.integrativeTask.Control to javafx.fxml;
-	exports com.example.integrativeTask.Controller;
-	opens com.example.integrativeTask.Controller to javafx.fxml;
+	exports com.example.integrativeTask.control;
+	opens com.example.integrativeTask.control to javafx.fxml;
+	exports com.example.integrativeTask.controller;
+	opens com.example.integrativeTask.controller to javafx.fxml;
 
 }

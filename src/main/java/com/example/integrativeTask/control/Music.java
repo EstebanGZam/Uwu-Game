@@ -1,4 +1,4 @@
-package com.example.integrativeTask.Control;
+package com.example.integrativeTask.control;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

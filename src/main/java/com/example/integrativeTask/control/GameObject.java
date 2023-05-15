@@ -1,6 +1,6 @@
-package com.example.integrativeTask.Control;
+package com.example.integrativeTask.control;
 
-import com.example.integrativeTask.model.CollisionChecker;
+import com.example.integrativeTask.controller.CollisionChecker;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -28,7 +28,7 @@ public abstract class GameObject {
 
 	public abstract void print(GraphicsContext graphicsContext);
 
-	public abstract void mover(CollisionChecker collisionChecker, TileManager tile);
+	public abstract void move(CollisionChecker collisionChecker, TileManager tile);
 
 	public GameObject(String image, int x, int y, int speed) {
 		area = new Rectangle();
