@@ -22,32 +22,32 @@ public class CollisionChecker {
 		switch (ob.getDirection()) {
 			case "up" :
 				topRow = (TopWorldY - ob.getSpeed()) / (48);
-				tileNum1 = tile.getMapTileNum()[leftCol][topRow];
-				tileNum2 = tile.getMapTileNum()[rightCol][topRow];
+				tileNum1 = tile.getMapTileNum()[topRow][leftCol];
+				tileNum2 = tile.getMapTileNum()[topRow][rightCol];
 				if (tile.getTile()[tileNum1].collision || tile.getTile()[tileNum2].collision) {
 					ob.setCollisionOn(true);
 				}
 				break;
 			case "down" :
 				bottomRow = (BottomWorldY + ob.getSpeed()) / (48);
-				tileNum1 = tile.getMapTileNum()[leftCol][bottomRow];
-				tileNum2 = tile.getMapTileNum()[rightCol][bottomRow];
+				tileNum1 = tile.getMapTileNum()[bottomRow][leftCol];
+				tileNum2 = tile.getMapTileNum()[bottomRow][rightCol];
 				if (tile.getTile()[tileNum1].collision == true|| tile.getTile()[tileNum2].collision == true) {
 					ob.setCollisionOn(true);
 				}
 				break;
 			case "left" :
 				leftCol = (leftWorldX - ob.getSpeed()) / (48);
-				tileNum1 = tile.getMapTileNum()[leftCol][topRow];
-				tileNum2 = tile.getMapTileNum()[leftCol][bottomRow];
+				tileNum1 = tile.getMapTileNum()[topRow][leftCol];
+				tileNum2 = tile.getMapTileNum()[bottomRow][leftCol];
 				if (tile.getTile()[tileNum1].collision  == true|| tile.getTile()[tileNum2].collision == true) {
 					ob.setCollisionOn(true);
 				}
 				break;
 			case "right" :
 				rightCol = (rightWorldX + ob.getSpeed()) / (48);
-				tileNum1 = tile.getMapTileNum()[rightCol][topRow];
-				tileNum2 = tile.getMapTileNum()[rightCol][bottomRow];
+				tileNum1 = tile.getMapTileNum()[topRow][rightCol];
+				tileNum2 = tile.getMapTileNum()[bottomRow][rightCol];
 				if (tile.getTile()[tileNum1].collision  == true|| tile.getTile()[tileNum2].collision == true) {
 					ob.setCollisionOn(true);
 				}
