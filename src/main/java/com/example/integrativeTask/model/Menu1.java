@@ -63,7 +63,7 @@ public class Menu1 implements Initializable {
 			if (Objects.equals(keyEvent.getCode().toString(), "ENTER")) {
 				music.stop();
 				Main.hideWindow((Stage) canvas.getScene().getWindow());
-				Main.showWindow("Level-1");
+				Main.showWindow("Level-3");
 			}
 		});
 	}
