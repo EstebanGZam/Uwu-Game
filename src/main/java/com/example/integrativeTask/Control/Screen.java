@@ -1,5 +1,7 @@
 package com.example.integrativeTask.Control;
 
+import com.example.integrativeTask.model.CollisionChecker;
+
 public class Screen {
 	//  Screen settings
 	public static final int originTileSize = 16;

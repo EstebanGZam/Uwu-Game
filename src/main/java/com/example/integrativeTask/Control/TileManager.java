@@ -69,11 +69,11 @@ public class TileManager {
 
 		tile[7] = new Tile();
 		tile[7].image = new Image(x4.toURI().toString());
-
+		tile[7].collision = true;
 
 		tile[8] = new Tile();
 		tile[8].image = new Image(x5.toURI().toString());
-
+		tile[8].collision = true;
 
 		tile[9] = new Tile();
 		tile[9].image = new Image(x7.toURI().toString());

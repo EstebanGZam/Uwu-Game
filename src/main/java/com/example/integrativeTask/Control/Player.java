@@ -5,6 +5,7 @@ import com.example.integrativeTask.model.KeyHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.io.File;
 
 public class Player extends GameObject {
@@ -23,10 +24,11 @@ public class Player extends GameObject {
 		this.gr = gr;
 		this.keyHandler = keyHandler;
 		this.lives = lives;
-		getArea().x = 8;
-		getArea().y = 16;
-		getArea().width = 32;
-		getArea().height = 32;
+		area = new Rectangle();
+		area.x = 7;
+		area.y = 14;
+		area.width = 32;
+		area.height = 32;
 		setDefault();
 		getPlayerImage();
 	}
@@ -147,12 +149,20 @@ public class Player extends GameObject {
 			setCollisionOn(false);
 			collisionChecker.checkTitle(this, tile);
 
-			if (!isCollisionOn()) {
+			if (isCollisionOn() == false) {
 				switch (getDirection()) {
-					case "up" -> setWorldY(getWorldY() - getSpeed());
-					case "down" -> setWorldY(getWorldY() + getSpeed());
-					case "left" -> setWorldX(getWorldX() - getSpeed());
-					case "right" -> setWorldX(getWorldX() + getSpeed());
+					case "up" :
+						setWorldY(getWorldY() - getSpeed()) ;
+						break;
+					case "down" :
+						setWorldY(getWorldY() + getSpeed());
+						break;
+					case "left" :
+						setWorldX(getWorldX() - getSpeed());
+						break;
+					case "right" :
+						setWorldX(getWorldX() + getSpeed());
+						break;
 				}
 			}
 
