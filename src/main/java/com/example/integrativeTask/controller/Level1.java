@@ -33,7 +33,7 @@ public class Level1 extends Thread implements Initializable {
 	KeyHandler keyHandler = new KeyHandler();
 
 	Player player = new Player("", 100, 100, 4, 3, graphicsContext, keyHandler);
-
+/*
 	@Override
 	public void run() {
 		double drawInterval = 1000000000 / fps;
@@ -58,7 +58,39 @@ public class Level1 extends Thread implements Initializable {
 
 		}
 	}
+*/
+@Override
+	public void run() {
+		long targetFPS = 60; // El objetivo es ejecutar el juego a 60 fotogramas por segundo
+		long targetFrameTime = 1000 / targetFPS; // Tiempo objetivo por fotograma en milisegundos
+		long lastUpdateTime = System.currentTimeMillis();
+		long lastDrawTime = System.currentTimeMillis();
 
+		while (game != null) {
+			long currentTime = System.currentTimeMillis();
+			long elapsedTime = currentTime - lastUpdateTime;
+			lastUpdateTime = currentTime;
+
+			update();
+
+			currentTime = System.currentTimeMillis();
+			elapsedTime = currentTime - lastDrawTime;
+			if (elapsedTime >= targetFrameTime) {
+				lastDrawTime = currentTime;
+				paintComponent(graphicsContext);
+			}
+
+			// Calcular el tiempo de espera antes del siguiente fotograma
+			long remainingTime = targetFrameTime - (System.currentTimeMillis() - lastDrawTime);
+			if (remainingTime > 0) {
+				try {
+					Thread.sleep(remainingTime);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+	}
 	public void update() {
 		player.move(collisionChecker, tile);
 	}

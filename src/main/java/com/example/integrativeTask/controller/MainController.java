@@ -60,7 +60,7 @@ public class MainController implements Initializable {
 			if (keyEvent.getCode().equals(KeyCode.ENTER)) {
 				music.stop();
 				Main.closeWindow((Stage) canvas.getScene().getWindow());
-				Main.renderView("level-3-view.fxml", "Level 3");
+				Main.renderView("level-1-view.fxml", "Level 1");
 			}
 		});
 	}
