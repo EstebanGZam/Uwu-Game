@@ -1,6 +1,6 @@
 package com.example.integrativeTask.controller;
 
-import com.example.integrativeTask.control.GameObject;
+import com.example.integrativeTask.control.EntityGame;
 import com.example.integrativeTask.control.TileManager;
 
 public class CollisionChecker {
@@ -12,7 +12,7 @@ public class CollisionChecker {
 		return instance;
 	}
 
-	public void checkTile(GameObject ob, TileManager tile) {
+	public void checkTile(EntityGame ob, TileManager tile) {
 
 		int leftWorldX = ob.getWorldX() + ob.getArea().x;
 		int rightWorldX = ob.getWorldX() + ob.getArea().x + ob.getArea().width;
