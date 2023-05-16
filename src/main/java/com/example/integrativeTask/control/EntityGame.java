@@ -15,11 +15,10 @@ public abstract class EntityGame {
 
 	private int solidAreaDefaultX;
 	private int solidAreaDefaultY;
-	private boolean collisionOn=false;
+	private boolean collisionOn;
 
 
 	public EntityGame(int x, int y, int speed) {
-		area = new Rectangle();
 		this.worldX = x;
 		this.worldY = y;
 		this.speed = speed;

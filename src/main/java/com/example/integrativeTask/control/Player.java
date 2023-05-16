@@ -17,6 +17,7 @@ public class Player extends EntityGame {
 
 	private int lives;
 
+
 	GraphicsContext gr;
 
 	private final int ScreenX = 768 / 2 - (48 / 2);
@@ -136,8 +137,6 @@ public class Player extends EntityGame {
 			collisionChecker.checkTile(this, tile);
 			int objIndex=collisionChecker.checkObject(this,true,objects);
 			pickObject(objIndex,objects);
-
-
 
 			if (!isCollisionOn()) {
 				switch (getDirection()) {

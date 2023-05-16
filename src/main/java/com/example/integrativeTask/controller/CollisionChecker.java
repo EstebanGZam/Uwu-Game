@@ -73,7 +73,7 @@ public class CollisionChecker {
 			if(objects[i]!=null){
 				//conseguimos la ubicacion del entity
 				entity.getArea().x= entity.getWorldX()+entity.getArea().x;
-				entity.getArea().y= entity.getWorldY()+entity.getArea().x;
+				entity.getArea().y= entity.getWorldY()+entity.getArea().y;
 				//conseguimo la ubicacion del objeto
 				objects[i].getArea().x=objects[i].getWorldX()+objects[i].getArea().x;
 				objects[i].getArea().y=objects[i].getWorldY()+objects[i].getArea().y;
@@ -82,7 +82,6 @@ public class CollisionChecker {
 					case "up" -> {
                        entity.getArea().y-= entity.getSpeed();
 					   if(entity.getArea().intersects(objects[i].getArea())){
-						   System.out.println("Si esta colisionando");
                            if(objects[i].isCollisionOn()){
 							   entity.setCollisionOn(true);
 						   }

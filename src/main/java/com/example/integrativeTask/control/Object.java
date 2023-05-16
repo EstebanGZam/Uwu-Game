@@ -6,6 +6,8 @@ import com.example.integrativeTask.screens.Screen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.awt.*;
+
 public class Object extends EntityGame {
 
     private double scale;
@@ -16,8 +18,14 @@ public class Object extends EntityGame {
         super(x, y, speed);
         this.name=name;
         this.scale=scale;
+        area = new Rectangle();
+        area.x = 7;
+        area.y = 14;
+        area.width = 32;
+        area.height = 32;
+        setSolidAreaDefaultX(area.x);
+        setSolidAreaDefaultY(area.y);
         getImages().add(new Image(TILES_PATH+path));
-        setCollisionOn(true);
     }
 
 
@@ -33,10 +41,6 @@ public class Object extends EntityGame {
 
     }
 
-
-    public void print(GraphicsContext graphicsContext) {
-
-    }
     public void move(CollisionChecker collisionChecker, TileManager tile) {
 
     }

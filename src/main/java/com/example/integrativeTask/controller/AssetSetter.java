@@ -11,5 +11,6 @@ public class AssetSetter {
     }
     public void setObject(EntityGame[] objects){
         objects[0]= new Object("\\1.png", 48*18,48*16,0,"AK-47",1.5);
+        objects[0].setCollisionOn(true);
     }
 }
