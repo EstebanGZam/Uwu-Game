@@ -26,7 +26,7 @@ public class Object extends EntityGame {
                 getWorldX()- Screen.TILES_SIZE<player.getWorldX()+player.getScreenX()&&
                 getWorldY()+ Screen.TILES_SIZE>player.getWorldY()-player.getScreenY()&&
                 getWorldY()- Screen.TILES_SIZE<player.getWorldY()+player.getScreenY()){
-            graphicsContext.drawImage(getImages().get(0),Screen.TILES_SIZE,Screen.TILES_SIZE);
+            graphicsContext.drawImage(getImages().get(0), screenX, screenY, 48, 48);
         }
 
     }
