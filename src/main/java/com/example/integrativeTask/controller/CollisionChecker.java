@@ -1,6 +1,7 @@
 package com.example.integrativeTask.controller;
 
 import com.example.integrativeTask.control.EntityGame;
+import com.example.integrativeTask.control.Object;
 import com.example.integrativeTask.control.TileManager;
 
 public class CollisionChecker {
@@ -60,6 +61,85 @@ public class CollisionChecker {
 				}
 			}
 		}
+	}
+
+
+	public int checkObject(EntityGame entity, boolean player, EntityGame [] objects){
+
+		int index=999;
+
+		for(int i=0; i<objects.length;i++){
+
+			if(objects[i]!=null){
+				//conseguimos la ubicacion del entity
+				entity.getArea().x= entity.getWorldX()+entity.getArea().x;
+				entity.getArea().y= entity.getWorldY()+entity.getArea().x;
+				//conseguimo la ubicacion del objeto
+				objects[i].getArea().x=objects[i].getWorldX()+objects[i].getArea().x;
+				objects[i].getArea().y=objects[i].getWorldY()+objects[i].getArea().y;
+
+				switch (entity.getDirection()){
+					case "up" -> {
+                       entity.getArea().y-= entity.getSpeed();
+					   if(entity.getArea().intersects(objects[i].getArea())){
+						   System.out.println("Si esta colisionando");
+                           if(objects[i].isCollisionOn()){
+							   entity.setCollisionOn(true);
+						   }
+						   if(player){
+							   index=i;
+						   }
+					   }
+					}
+					case "down" -> {
+						entity.getArea().y+= entity.getSpeed();
+						if(entity.getArea().intersects(objects[i].getArea())){
+							System.out.println("Si esta colisionando");
+							if(objects[i].isCollisionOn()){
+								entity.setCollisionOn(true);
+							}
+							if(player){
+								index=i;
+							}
+						}
+					}
+					case "left" -> {
+						entity.getArea().x-= entity.getSpeed();
+						if(entity.getArea().intersects(objects[i].getArea())){
+							System.out.println("Si esta colisionando");
+							if(objects[i].isCollisionOn()){
+								entity.setCollisionOn(true);
+							}
+							if(player){
+								index=i;
+							}
+						}
+					}
+					case "right" -> {
+						entity.getArea().x+= entity.getSpeed();
+						if(entity.getArea().intersects(objects[i].getArea())){
+							System.out.println("Si esta colisionando");
+							if(objects[i].isCollisionOn()){
+								entity.setCollisionOn(true);
+							}
+							if(player){
+								index=i;
+							}
+						}
+					}
+
+				}
+				entity.getArea().x=entity.getSolidAreaDefaultX();
+				entity.getArea().y=entity.getSolidAreaDefaultY();
+				objects[i].getArea().x= objects[i].getSolidAreaDefaultX();
+				objects[i].getArea().y= objects[i].getSolidAreaDefaultY();
+			}
+		}
+
+
+
+      return index;
+
 	}
 
 

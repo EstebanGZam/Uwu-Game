@@ -12,6 +12,9 @@ public abstract class EntityGame {
 	private int worldX, worldY, speed, spriteCounter = 0, spriteNum = 1;
 	private String direction;
 	protected Rectangle area;
+
+	private int solidAreaDefaultX;
+	private int solidAreaDefaultY;
 	private boolean collisionOn=false;
 
 
@@ -28,7 +31,7 @@ public abstract class EntityGame {
 
 	}
 
-	public void move(CollisionChecker collisionChecker, TileManager tile,Player player) {
+	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] object) {
 	}
 
 
@@ -99,5 +102,21 @@ public abstract class EntityGame {
 
 	public void setImages(ArrayList<Image> images) {
 		this.images = images;
+	}
+
+	public int getSolidAreaDefaultX() {
+		return solidAreaDefaultX;
+	}
+
+	public void setSolidAreaDefaultX(int solidAreaDefaultX) {
+		this.solidAreaDefaultX = solidAreaDefaultX;
+	}
+
+	public int getSolidAreaDefaultY() {
+		return solidAreaDefaultY;
+	}
+
+	public void setSolidAreaDefaultY(int solidAreaDefaultY) {
+		this.solidAreaDefaultY = solidAreaDefaultY;
 	}
 }

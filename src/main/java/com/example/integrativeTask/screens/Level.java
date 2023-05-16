@@ -1,6 +1,7 @@
 package com.example.integrativeTask.screens;
 
 import com.example.integrativeTask.control.EntityGame;
+import com.example.integrativeTask.control.Object;
 import com.example.integrativeTask.control.Player;
 import com.example.integrativeTask.control.TileManager;
 import com.example.integrativeTask.controller.*;
@@ -45,7 +46,7 @@ public class Level extends BaseScreen {
 	}
 
 	public void update() {
-		player.move(CollisionChecker.getInstance(), tile,player);
+		player.move(CollisionChecker.getInstance(), tile,player, objects);
 	}
 
 	@Override

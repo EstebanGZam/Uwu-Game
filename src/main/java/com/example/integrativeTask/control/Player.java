@@ -31,6 +31,8 @@ public class Player extends EntityGame {
 		area.y = 14;
 		area.width = 32;
 		area.height = 32;
+		setSolidAreaDefaultX(area.x);
+		setSolidAreaDefaultY(area.y);
 		setDefault();
 		getPlayerImage();
 	}
@@ -116,7 +118,7 @@ public class Player extends EntityGame {
 	}
 
 	@Override
-	public void move(CollisionChecker collisionChecker, TileManager tile,Player player) {
+	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] objects) {
 		KeyHandler keyHandler = KeyHandler.getInstance();
 		if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
 				keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
@@ -132,6 +134,10 @@ public class Player extends EntityGame {
 
 			setCollisionOn(false);
 			collisionChecker.checkTile(this, tile);
+			int objIndex=collisionChecker.checkObject(this,true,objects);
+			pickObject(objIndex,objects);
+
+
 
 			if (!isCollisionOn()) {
 				switch (getDirection()) {
@@ -144,7 +150,7 @@ public class Player extends EntityGame {
 
 			setSpriteCounter(getSpriteCounter() + 1);
 
-			if (getSpriteCounter() > 10) {
+			if (getSpriteCounter() > 12) {
 				if (getSpriteNum() == 1 || getSpriteNum() == 2) {
 					setSpriteNum(getSpriteNum() + 1);
 				} else {
@@ -154,6 +160,12 @@ public class Player extends EntityGame {
 			}
 		}
 
+	}
+
+	public void pickObject(int i,EntityGame [] objects){
+		if(i!=999){
+          objects[i]=null;
+		}
 	}
 
 	public void setLives(int lives) {

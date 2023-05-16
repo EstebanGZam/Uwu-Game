@@ -88,7 +88,7 @@ public class TileManager {
 			int worldX = col * 48;
 			int worldY = row * 48;
 			int screenInX = worldX - playerX + screenX;
-			int screenInY = worldY - playerY + screenY;
+			int screenInY = worldY - playerY + screenY+2;
 
 			if (worldX + 48 > playerX - screenX && worldX - 48 < playerX + screenX
 					&& worldY + 48 > playerY - screenY && worldY - 48 < playerY + screenY) {
