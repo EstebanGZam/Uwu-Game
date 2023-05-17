@@ -17,6 +17,8 @@ public abstract class EntityGame {
 	private int solidAreaDefaultY;
 	private boolean collisionOn;
 
+	private String name;
+
 
 	public EntityGame(int x, int y, int speed) {
 		this.worldX = x;
@@ -117,5 +119,13 @@ public abstract class EntityGame {
 
 	public void setSolidAreaDefaultY(int solidAreaDefaultY) {
 		this.solidAreaDefaultY = solidAreaDefaultY;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

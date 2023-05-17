@@ -163,8 +163,18 @@ public class Player extends EntityGame {
 
 	public void pickObject(int i,EntityGame [] objects){
 		if(i!=999){
-          objects[i]=null;
+			switch (objects[i].getName()){
+				case "AK-47":
+					objects[i] = null;
+					break;
+				case  "portal":
+					objects[i].setCollisionOn(false);
+					MainController.LEVEL++;
+					break;
+			}
+
 		}
+
 	}
 
 	public void setLives(int lives) {

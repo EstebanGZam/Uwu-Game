@@ -12,11 +12,11 @@ public class Object extends EntityGame {
 
     private double scale;
 
-    String name;
+
     public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\object";
     public Object(String path,int x, int y, int speed,String name,double scale) {
         super(x, y, speed);
-        this.name=name;
+        setName(name);
         this.scale=scale;
         area = new Rectangle();
         area.x = 7;
