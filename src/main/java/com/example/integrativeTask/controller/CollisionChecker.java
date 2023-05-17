@@ -85,7 +85,7 @@ public class CollisionChecker {
                            if(objects[i].isCollisionOn()){
 							   entity.setCollisionOn(true);
 						   }
-						   if(player){
+						   if(player&&objects[i].isCollisionOn()){
 							   index=i;
 						   }
 					   }
@@ -97,7 +97,7 @@ public class CollisionChecker {
 							if(objects[i].isCollisionOn()){
 								entity.setCollisionOn(true);
 							}
-							if(player){
+							if(player&&objects[i].isCollisionOn()){
 								index=i;
 							}
 						}
@@ -109,7 +109,7 @@ public class CollisionChecker {
 							if(objects[i].isCollisionOn()){
 								entity.setCollisionOn(true);
 							}
-							if(player){
+							if(player&&objects[i].isCollisionOn()){
 								index=i;
 							}
 						}
@@ -121,7 +121,7 @@ public class CollisionChecker {
 							if(objects[i].isCollisionOn()){
 								entity.setCollisionOn(true);
 							}
-							if(player){
+							if(player&&objects[i].isCollisionOn()){
 								index=i;
 							}
 						}

@@ -124,4 +124,12 @@ public class Level extends BaseScreen {
 	public void onKeyReleased(KeyEvent event) {
 		KeyHandler.getInstance().keyReleased(event);
 	}
+
+	public EntityGame[] getObjects() {
+		return objects;
+	}
+
+	public void setObjects(EntityGame[] objects) {
+		this.objects = objects;
+	}
 }

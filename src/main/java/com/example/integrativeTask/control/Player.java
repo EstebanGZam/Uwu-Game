@@ -168,8 +168,9 @@ public class Player extends EntityGame {
 					objects[i] = null;
 					break;
 				case  "portal":
-					objects[i].setCollisionOn(false);
+					objects[i] = null;
 					MainController.LEVEL++;
+					setDefault();
 					break;
 			}
 

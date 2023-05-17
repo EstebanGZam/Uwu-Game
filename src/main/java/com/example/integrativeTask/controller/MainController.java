@@ -47,6 +47,7 @@ public class MainController implements Initializable {
 		printInCanvas();
 		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player));
 		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player));
+		levels.get(1).getObjects()[1].setCollisionOn(false);
 		initEvents();
 	}
 
