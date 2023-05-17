@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,6 +52,14 @@ public class Level extends BaseScreen {
 
 	@Override
 	public void paint() {
+
+		// Debug
+		long drawStart=0;
+		if(KeyHandler.getInstance().isDrawTime()){
+			drawStart= System.nanoTime();
+		}
+
+
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		graphicsContext.setFill(Color.BLACK);
 		graphicsContext.fillRect(0, 0, Screen.SCREEN_WIDTH, Screen.SCREEN_HEIGHT);
@@ -74,6 +83,14 @@ public class Level extends BaseScreen {
 
 		//ui
 		ui.Draw(graphicsContext,player);
+
+		//debug
+		if(KeyHandler.getInstance().isDrawTime()){
+			long drawEnd =System.nanoTime();
+			long passed= drawEnd-drawStart;
+			System.out.println(passed);
+		}
+
 	}
 
 	public void addEntity(){

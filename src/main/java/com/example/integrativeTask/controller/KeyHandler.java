@@ -11,7 +11,7 @@ public class KeyHandler {
 		return instance;
 	}
 
-	private boolean upPressed, downPressed, leftPressed, rightPressed;
+	private boolean upPressed, downPressed, leftPressed, rightPressed,drawTime;
 
 	public void keyPressed(KeyEvent event) {
 		switch (event.getCode()) {
@@ -19,6 +19,13 @@ public class KeyHandler {
 			case S -> downPressed = true;
 			case A -> leftPressed = true;
 			case D -> rightPressed = true;
+			case T -> {
+				if(drawTime==false){
+					drawTime=true;
+				}else if(drawTime==true){
+					drawTime=false;
+				}
+			}
 		}
 	}
 
@@ -45,5 +52,13 @@ public class KeyHandler {
 
 	public boolean isRightPressed() {
 		return rightPressed;
+	}
+
+	public boolean isDrawTime() {
+		return drawTime;
+	}
+
+	public void setDrawTime(boolean drawTime) {
+		this.drawTime = drawTime;
 	}
 }
