@@ -29,7 +29,7 @@ public class AssetSetter {
                 objects[1]= new Object("\\portal.png", 48*19,48*21,0,"portal",1.5);
                 objects[1].setCollisionOn(true);
                 //generateEnemies(1,points,enemiesList);
-                Enemy enemy = new Enemy(18*48, 17*48,4,3);
+                Enemy enemy = new Enemy(18*48, 17*48,2,3);
                 enemiesList.add(enemy);
 
                 break;

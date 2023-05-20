@@ -47,10 +47,10 @@ public class Level extends BaseScreen {
 	}
 
 	public void update() {
-		player.move(CollisionChecker.getInstance(), tile,player, objects);
+		player.move(CollisionChecker.getInstance(), tile,player, objects,enemies);
 
 		for(int i=0;i<enemies.size();i++){
-			enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects);
+			enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects,enemies);
 		}
 	}
 

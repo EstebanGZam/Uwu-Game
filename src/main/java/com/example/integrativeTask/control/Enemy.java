@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Enemy extends EntityGame{
@@ -68,23 +69,20 @@ public class Enemy extends EntityGame{
     }
 
     @Override
-    public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects) {
-        KeyHandler keyHandler = KeyHandler.getInstance();
-        if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
-                keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
-            if (keyHandler.isUpPressed()) {
-                setDirection("up");
-            } else if (keyHandler.isDownPressed()) {
-                setDirection("down");
-            } else if (keyHandler.isLeftPressed()) {
-                setDirection("left");
-            } else {
-                setDirection("right");
-            }
-
+    public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> enemies) {
+        setAction();
             setCollisionOn(false);
             collisionChecker.checkTile(this, tile);
+            boolean collisionPlayer=collisionChecker.checkPlayer(this,player);
+            collisionChecker.checkEntity(this,enemies);
 
+            if (collisionPlayer){
+                System.out.println(player.isInvincible());
+                if(!player.isInvincible()){
+                     player.setLifes(getLifes()-1);
+                     player.setInvincible(true);
+                }
+            }
             if (!isCollisionOn()) {
                 switch (getDirection()) {
                     case "up" -> setWorldY(getWorldY() - getSpeed());
@@ -97,7 +95,7 @@ public class Enemy extends EntityGame{
             setSpriteCounter(getSpriteCounter() + 1);
 
             if (getSpriteCounter() > 12) {
-                if (getSpriteNum() == 1 || getSpriteNum() == 2) {
+                if (getSpriteNum() == 1 ) {
                     setSpriteNum(getSpriteNum() + 1);
                 } else {
                     setSpriteNum(1);
@@ -106,7 +104,6 @@ public class Enemy extends EntityGame{
             }
         }
 
-    }
 
     @Override
     public void print(GraphicsContext graphicsContext, Player player) {
@@ -118,6 +115,7 @@ public class Enemy extends EntityGame{
                 getWorldX()- Screen.TILES_SIZE<player.getWorldX()+player.getScreenX()&&
                 getWorldY()+ Screen.TILES_SIZE>player.getWorldY()-player.getScreenY()&&
                 getWorldY()- Screen.TILES_SIZE<player.getWorldY()+player.getScreenY()){
+
             switch (getDirection()) {
                 case "up" -> {
                     if (getSpriteNum() == 1) {

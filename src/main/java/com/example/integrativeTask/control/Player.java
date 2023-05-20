@@ -7,6 +7,7 @@ import com.example.integrativeTask.controller.KeyHandler;
 import com.example.integrativeTask.controller.MainController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.io.File;
@@ -16,8 +17,9 @@ public class Player extends EntityGame {
 
 	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\16x16-RPG-characters\\sprites\\new-style";
 
+    private boolean invincible;
 
-
+	public int invincibleCounter;
 	GraphicsContext gr;
 
 	private final int ScreenX = 768 / 2 - (48 / 2);
@@ -120,7 +122,7 @@ public class Player extends EntityGame {
 	}
 
 	@Override
-	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] objects) {
+	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] objects,ArrayList<EntityGame> Enemies) {
 		KeyHandler keyHandler = KeyHandler.getInstance();
 		if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
 				keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
@@ -138,6 +140,9 @@ public class Player extends EntityGame {
 			collisionChecker.checkTile(this, tile);
 			int objIndex=collisionChecker.checkObject(this,true,objects);
 			pickObject(objIndex,objects);
+
+			int monsterIndex=collisionChecker.checkEntity(this,Enemies);
+			contactEnemy(monsterIndex,Enemies);
 
 			if (!isCollisionOn()) {
 				switch (getDirection()) {
@@ -159,7 +164,13 @@ public class Player extends EntityGame {
 				setSpriteCounter(0);
 			}
 		}
-
+      if(invincible){
+		  invincibleCounter++;
+		  if(invincibleCounter>60){
+			  invincible=false;
+			  invincibleCounter=0;
+		  }
+	  }
 	}
 
 	public void pickObject(int i,EntityGame [] objects){
@@ -182,6 +193,17 @@ public class Player extends EntityGame {
 
 	}
 
+	public void contactEnemy(int i , ArrayList<EntityGame> enemies){
+		if(i!=999) {
+			if(!invincible){
+				setLifes(getLifes()-1);
+				invincible=true;
+			}
+
+		}
+
+	}
+
 
 	public int getScreenX() {
 		return ScreenX;
@@ -197,5 +219,13 @@ public class Player extends EntityGame {
 
 	public void setInventory(ArrayList<EntityGame> inventory) {
 		this.inventory = inventory;
+	}
+
+	public boolean isInvincible() {
+		return invincible;
+	}
+
+	public void setInvincible(boolean invincible) {
+		this.invincible = invincible;
 	}
 }

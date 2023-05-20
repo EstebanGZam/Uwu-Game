@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public abstract class EntityGame {
     private ArrayList <Image> images;
+
 	private int worldX, worldY, speed, spriteCounter = 0, spriteNum = 1;
 	private String direction;
 	protected Rectangle area;
@@ -36,7 +37,7 @@ public abstract class EntityGame {
 
 	}
 
-	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] object) {
+	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] object,ArrayList<EntityGame> enemies) {
 	}
 
 

@@ -2,7 +2,10 @@ package com.example.integrativeTask.controller;
 
 import com.example.integrativeTask.control.EntityGame;
 import com.example.integrativeTask.control.Object;
+import com.example.integrativeTask.control.Player;
 import com.example.integrativeTask.control.TileManager;
+
+import java.util.ArrayList;
 
 public class CollisionChecker {
 	private static CollisionChecker instance;
@@ -138,6 +141,90 @@ public class CollisionChecker {
 
 
       return index;
+
+	}
+
+	public int checkEntity(EntityGame entity, ArrayList<EntityGame> target){
+
+		int index=999;
+
+		for(int i=0; i<target.size();i++){
+
+			if(target.get(i)!=null){
+				//conseguimos la ubicacion del entity
+				entity.getArea().x= entity.getWorldX()+entity.getArea().x;
+				entity.getArea().y= entity.getWorldY()+entity.getArea().y;
+				//conseguimo la ubicacion del objeto
+				target.get(i).getArea().x=target.get(i).getWorldX()+target.get(i).getArea().x;
+				target.get(i).getArea().y=target.get(i).getWorldY()+target.get(i).getArea().y;
+
+				switch (entity.getDirection()){
+					case "up" -> {
+						entity.getArea().y-= entity.getSpeed();
+					}
+					case "down" -> {
+						entity.getArea().y+= entity.getSpeed();
+					}
+					case "left" -> {
+						entity.getArea().x-= entity.getSpeed();
+					}
+					case "right" -> {
+						entity.getArea().x+= entity.getSpeed();
+					}
+
+				}
+				if(entity.getArea().intersects(target.get(i).getArea())){
+					if(target.get(i)!=entity){
+						entity.setCollisionOn(true);
+						index=i;
+					}
+				}
+				entity.getArea().x=entity.getSolidAreaDefaultX();
+				entity.getArea().y=entity.getSolidAreaDefaultY();
+				target.get(i).getArea().x= target.get(i).getSolidAreaDefaultX();
+				target.get(i).getArea().y= target.get(i).getSolidAreaDefaultY();
+			}
+		}
+
+
+
+		return index;
+
+	}
+
+	public boolean checkPlayer(EntityGame entity, Player player){
+          boolean collisionPlayer=false;
+		//conseguimos la ubicacion del entity
+		entity.getArea().x= entity.getWorldX()+entity.getArea().x;
+		entity.getArea().y= entity.getWorldY()+entity.getArea().y;
+		//conseguimo la ubicacion del objeto
+		player.getArea().x=player.getWorldX()+player.getArea().x;
+		player.getArea().y=player.getWorldY()+player.getArea().y;
+
+		switch (entity.getDirection()){
+			case "up" -> {
+				entity.getArea().y-= entity.getSpeed();
+			}
+			case "down" -> {
+				entity.getArea().y+= entity.getSpeed();
+			}
+			case "left" -> {
+				entity.getArea().x-= entity.getSpeed();
+			}
+			case "right" -> {
+				entity.getArea().x+= entity.getSpeed();
+			}
+
+		}
+		if(entity.getArea().intersects(player.getArea())){
+				entity.setCollisionOn(true);
+				 collisionPlayer=true;
+		}
+		entity.getArea().x=entity.getSolidAreaDefaultX();
+		entity.getArea().y=entity.getSolidAreaDefaultY();
+		player.getArea().x= player.getSolidAreaDefaultX();
+		player.getArea().y= player.getSolidAreaDefaultY();
+		return  collisionPlayer;
 
 	}
 
