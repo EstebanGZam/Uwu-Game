@@ -15,7 +15,7 @@ public class Object extends EntityGame {
 
     public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\object";
     public Object(String path,int x, int y, int speed,String name,double scale) {
-        super(x, y, speed);
+        super(x, y, speed,0);
         setName(name);
         this.scale=scale;
         area = new Rectangle();

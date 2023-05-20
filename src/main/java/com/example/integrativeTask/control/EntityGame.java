@@ -16,14 +16,18 @@ public abstract class EntityGame {
 	private int solidAreaDefaultX;
 	private int solidAreaDefaultY;
 	private boolean collisionOn;
+	private int lifes;
+	private int Maxlifes;
 
 	private String name;
 
 
-	public EntityGame(int x, int y, int speed) {
+	public EntityGame(int x, int y, int speed,int lifes) {
 		this.worldX = x;
 		this.worldY = y;
 		this.speed = speed;
+		this.lifes=lifes;
+		this.Maxlifes=lifes;
 		direction = "down";
 		images= new ArrayList<>();
 	}
@@ -127,5 +131,21 @@ public abstract class EntityGame {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getLifes() {
+		return lifes;
+	}
+
+	public void setLifes(int lifes) {
+		this.lifes = lifes;
+	}
+
+	public int getMaxlifes() {
+		return Maxlifes;
+	}
+
+	public void setMaxlifes(int maxlifes) {
+		Maxlifes = maxlifes;
 	}
 }

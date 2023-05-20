@@ -10,12 +10,12 @@ import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public class Player extends EntityGame {
 
 	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\16x16-RPG-characters\\sprites\\new-style";
 
-	private int lives;
 
 
 	GraphicsContext gr;
@@ -23,10 +23,11 @@ public class Player extends EntityGame {
 	private final int ScreenX = 768 / 2 - (48 / 2);
 	private final int ScreenY = 560 / 2 - (48 / 2);
 
+	private ArrayList<EntityGame> inventory=new ArrayList<>();
+
 	public Player(int x, int y, int speed, int lives, GraphicsContext gr) {
-		super(x, y, speed);
+		super(x, y, speed,lives);
 		this.gr = gr;
-		this.lives = lives;
 		area = new Rectangle();
 		area.x = 7;
 		area.y = 14;
@@ -42,7 +43,7 @@ public class Player extends EntityGame {
 	public void setDefault() {
 		setWorldX(100 * 4);  // posicion de inicio del jugagor
 		setWorldY(100 * 4);  // posicion de inicio del jugador
-		setLives(3);
+		setLifes(3);
 		setSpeed(4);
 		setDirection("down");
 	}
@@ -165,6 +166,9 @@ public class Player extends EntityGame {
 		if(i!=999){
 			switch (objects[i].getName()){
 				case "AK-47":
+					if(inventory.size()<2){
+						inventory.add(objects[i]);
+					}
 					objects[i] = null;
 					break;
 				case  "portal":
@@ -178,13 +182,6 @@ public class Player extends EntityGame {
 
 	}
 
-	public void setLives(int lives) {
-		this.lives = lives;
-	}
-
-	public int getLives() {
-		return lives;
-	}
 
 	public int getScreenX() {
 		return ScreenX;
@@ -192,5 +189,13 @@ public class Player extends EntityGame {
 
 	public int getScreenY() {
 		return ScreenY;
+	}
+
+	public ArrayList<EntityGame> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(ArrayList<EntityGame> inventory) {
+		this.inventory = inventory;
 	}
 }

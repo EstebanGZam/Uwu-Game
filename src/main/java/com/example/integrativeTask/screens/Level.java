@@ -31,7 +31,7 @@ public class Level extends BaseScreen {
 	private Ui ui;
 
 
-	public Level(int maxWorldColumns, int maxWorldRow, Canvas canvas, String levelRelativePath, Player player) {
+	public Level(int maxWorldColumns, int maxWorldRow, Canvas canvas, String levelRelativePath, Player player,int map) {
 		super(canvas);
 		this.maxWorldCol = maxWorldColumns;
 		this.maxWorldRow = maxWorldRow;
@@ -41,7 +41,7 @@ public class Level extends BaseScreen {
 		this.player = player;
 		this.entityList=new ArrayList<>();
 		this.ui=new Ui();
-		this.assetSetter = new AssetSetter();
+		this.assetSetter = new AssetSetter(map);
 		assetSetter.setObject(objects);
 
 	}

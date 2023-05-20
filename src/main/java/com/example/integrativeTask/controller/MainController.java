@@ -45,9 +45,8 @@ public class MainController implements Initializable {
 		canvas.setFocusTraversable(true);
 		soundtrack();
 		printInCanvas();
-		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player));
-		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player));
-		levels.get(1).getObjects()[1].setCollisionOn(false);
+		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player,1));
+		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player,3));
 		initEvents();
 	}
 
