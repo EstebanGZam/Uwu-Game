@@ -1,11 +1,13 @@
 package com.example.integrativeTask.control;
 
 import com.example.integrativeTask.controller.MainController;
+import com.example.integrativeTask.model.Point;
 import com.example.integrativeTask.model.Tile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class TileManager {
 	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\tiles-sprites";
@@ -14,6 +16,8 @@ public class TileManager {
 	private Tile[] tile;
 
 	private int[][] mapTileNum;
+
+	private ArrayList<Point> validPositions;
 
 	private int maxWorldCol;
 	private int maxWorldRow;
@@ -24,6 +28,7 @@ public class TileManager {
 		this.stagePath = stagePath;
 		this.maxWorldCol = columns;
 		this.maxWorldRow = rows;
+		validPositions= new ArrayList<>();
 		tile = new Tile[TILES_AMOUNT];
 		mapTileNum = new int[rows][columns];
 		initializeTilesImages();
@@ -65,6 +70,9 @@ public class TileManager {
 
 					mapTileNum[row][col] = num;
 					col++;
+					if(!tile[num].isCollision()){
+						validPositions.add(new Point(row, col));
+					}
 				}
 				if (col == maxWorldCol) {
 					col = 0;
@@ -134,5 +142,13 @@ public class TileManager {
 
 	public void setMaxWorldRow(int maxWorldRow) {
 		this.maxWorldRow = maxWorldRow;
+	}
+
+	public ArrayList<Point> getValidPositions() {
+		return validPositions;
+	}
+
+	public void setValidPositions(ArrayList<Point> validPositions) {
+		this.validPositions = validPositions;
 	}
 }

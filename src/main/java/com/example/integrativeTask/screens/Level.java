@@ -24,7 +24,7 @@ public class Level extends BaseScreen {
 
 	private EntityGame []  objects = new EntityGame[4];;
 
-	private EntityGame []  enemies= new EntityGame[3];
+	private ArrayList<EntityGame>  enemies= new ArrayList<>();
 
 	private AssetSetter assetSetter;
 
@@ -42,12 +42,16 @@ public class Level extends BaseScreen {
 		this.entityList=new ArrayList<>();
 		this.ui=new Ui();
 		this.assetSetter = new AssetSetter(map);
-		assetSetter.setObject(objects);
+		assetSetter.setObject(objects,enemies,tile.getValidPositions());
 
 	}
 
 	public void update() {
 		player.move(CollisionChecker.getInstance(), tile,player, objects);
+
+		for(int i=0;i<enemies.size();i++){
+			enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects);
+		}
 	}
 
 	@Override
@@ -95,9 +99,9 @@ public class Level extends BaseScreen {
 
 	public void addEntity(){
 		entityList.add(player);
-		for(int i=0;i<enemies.length;i++){
-			if(enemies[i]!=null){
-				entityList.add(enemies[i]);
+		for(int i=0;i<enemies.size();i++){
+			if(enemies.get(i)!=null){
+				entityList.add(enemies.get(i));
 			}
 		}
 		for(int i=0;i<objects.length;i++){
