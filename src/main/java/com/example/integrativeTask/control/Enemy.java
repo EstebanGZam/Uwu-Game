@@ -77,10 +77,10 @@ public class Enemy extends EntityGame{
             collisionChecker.checkEntity(this,enemies);
 
             if (collisionPlayer){
-                System.out.println(player.isInvincible());
                 if(!player.isInvincible()){
-                     player.setLifes(getLifes()-1);
-                     player.setInvincible(true);
+                    int x=player.getLifes()-1;
+                    player.setLifes(x);
+                    player.setInvincible(true);
                 }
             }
             if (!isCollisionOn()) {
