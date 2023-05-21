@@ -36,7 +36,10 @@ public class KeyHandler {
 			case A -> leftPressed = false;
 			case D -> rightPressed = false;
 		}
+
+
 	}
+
 
 	public boolean isUpPressed() {
 		return upPressed;

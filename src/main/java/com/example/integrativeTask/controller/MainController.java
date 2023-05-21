@@ -9,7 +9,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -28,6 +31,8 @@ public class MainController implements Initializable {
 	private Canvas canvas;
 	@FXML
 	private GraphicsContext graphics;
+
+
 	@FXML
 	private Music music;
 	private boolean isRunning;
@@ -59,6 +64,9 @@ public class MainController implements Initializable {
 		graphics.drawImage(getImage("\\menu2.jpg"), 0, 0, 768.0, 576.0);
 		graphics.drawImage(getImage("\\logo.png"), -100, -100, 960, 776);
 		graphics.drawImage(getImage("\\enter.png"), 0, 130, 768, 576);
+
+
+
 	}
 
 	private Image getImage(String relativePath) {
@@ -72,6 +80,7 @@ public class MainController implements Initializable {
 			long targetFrameTime = 1000 / targetFPS; // Tiempo objetivo por fotograma en milisegundos
 			long lastDrawTime = System.currentTimeMillis();
 			while (isRunning) {
+
 				long currentTime, elapsedTime;
 
 				levels.get(LEVEL).update();
@@ -99,6 +108,12 @@ public class MainController implements Initializable {
 		});
 		canvas.setOnKeyReleased(event -> {
 			levels.get(LEVEL).onKeyReleased(event);
+		});
+
+		canvas.setOnMouseMoved(mouseEvent -> {
+
+			levels.get(LEVEL).mouseMoved(mouseEvent);
+
 		});
 
 	}

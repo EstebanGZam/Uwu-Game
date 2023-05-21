@@ -7,7 +7,10 @@ import com.example.integrativeTask.control.TileManager;
 import com.example.integrativeTask.controller.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,6 +33,10 @@ public class Level extends BaseScreen {
 
 	private Ui ui;
 
+	private Rectangle mouseRect;
+	private  double mouseRectX;
+	private double mouseRectY;
+
 
 	public Level(int maxWorldColumns, int maxWorldRow, Canvas canvas, String levelRelativePath, Player player,int map) {
 		super(canvas);
@@ -43,6 +50,7 @@ public class Level extends BaseScreen {
 		this.ui=new Ui();
 		this.assetSetter = new AssetSetter(map);
 		assetSetter.setObject(objects,enemies,tile.getValidPositions());
+		mouseRect = new Rectangle(mouseRectX, mouseRectY, 20,20);
 
 	}
 
@@ -80,6 +88,10 @@ public class Level extends BaseScreen {
 		for(int i=0;i<entityList.size(); i++){
 			entityList.get(i).print(graphicsContext,player);
 		}
+
+		//Draw pointer
+		graphicsContext.setFill(Color.RED);
+		graphicsContext.fillRect(mouseRectX, mouseRectY,mouseRect.getWidth(),mouseRect.getHeight());
 
 		for(int i=0;i<entityList.size(); i++){
 			entityList.remove(i);
@@ -127,6 +139,15 @@ public class Level extends BaseScreen {
 	@Override
 	public void onKeyReleased(KeyEvent event) {
 		KeyHandler.getInstance().keyReleased(event);
+	}
+
+
+	public  void mouseMoved(MouseEvent mouseEvent ){
+
+			mouseRectX = mouseEvent.getX();
+			mouseRectY = mouseEvent.getY();
+
+
 	}
 
 	public EntityGame[] getObjects() {
