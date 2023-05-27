@@ -13,26 +13,36 @@ public class KeyHandler {
 		return instance;
 	}
 
-	private boolean upPressed, downPressed, leftPressed, rightPressed,drawTime, enterPressed;
+	private boolean upPressed, downPressed, leftPressed, rightPressed,drawTime;
 
-	public void keyPressed(KeyEvent event) {
+	public void keyPressed(KeyEvent event,Level level) {
 
-		switch (event.getCode()) {
-			case W -> upPressed = true;
-			case S -> downPressed = true;
-			case A -> leftPressed = true;
-			case D -> rightPressed = true;
-			case T -> {
-				if(drawTime==false){
-					drawTime=true;
-				}else if(drawTime==true){
-					drawTime=false;
-				}
-			}
-		}
+       if(level.gameState==level.playState){
+		   switch (event.getCode()) {
+			   case W -> upPressed = true;
+			   case S -> downPressed = true;
+			   case A -> leftPressed = true;
+			   case D -> rightPressed = true;
+			   case T -> {
+				   if(drawTime==false){
+					   drawTime=true;
+				   }else if(drawTime==true){
+					   drawTime=false;
+				   }
+			   }
+		   }
+	   }else if(level.gameState==level.gameOverState){
+		   if(event.getCode()==KeyCode.SPACE){
+			   if (level.getUi().commandNum == 0) {
+				   level.gameState = level.playState;
+				   level.retry();
+			   }
+		   }
+	   }
+
 	}
 
-	public void keyReleased(KeyEvent event) {
+	public void keyReleased(KeyEvent event,Level level) {
 		switch (event.getCode()) {
 			case W -> upPressed = false;
 			case S -> downPressed = false;
@@ -42,25 +52,6 @@ public class KeyHandler {
 
 
 	}
-
-	public void gameOverState(KeyEvent e, Level level) {
-		KeyCode code = e.getCode();
-
-		if (code == KeyCode.ENTER) {
-			level.getUi().commandNum--;
-			if (level.getUi().commandNum < 0) {
-				level.getUi().commandNum = 1;
-			}
-		}
-
-		if (code == KeyCode.ENTER) {
-			if (level.getUi().commandNum == 0) {
-				level.gameState = level.playState;
-				level.retry();
-			}
-		}
-	}
-
 
 	public boolean isUpPressed() {
 		return upPressed;
@@ -82,9 +73,6 @@ public class KeyHandler {
 		return drawTime;
 	}
 
-	public boolean  isEnterPressed(){
-		return  enterPressed;
-	}
 
 	public void setDrawTime(boolean drawTime) {
 		this.drawTime = drawTime;

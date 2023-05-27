@@ -59,7 +59,7 @@ public class AssetSetter {
             int randomX = randomPosition.getX();
             int randomY = randomPosition.getY();
             validPositionsList.remove(randomIndex);
-            Enemy enemy = new Enemy(randomY*48, randomX*48,2,3);
+            Enemy enemy = new Enemy(randomX*48, randomY*48,2,3);
             enemies.add(enemy);
         }
     }

@@ -19,7 +19,7 @@ import java.util.Comparator;
 
 public class Level extends BaseScreen {
 	private final int maxWorldCol, maxWorldRow, worldWidth, worldHeight;
-	private final TileManager tile;
+	private  TileManager tile;
 	private final Player player;
 
 
@@ -41,6 +41,8 @@ public class Level extends BaseScreen {
 
 	public final int gameOverState = 2;
 
+	private String levelRelativePath;
+
 
 	public Level(int maxWorldColumns, int maxWorldRow, Canvas canvas, String levelRelativePath, Player player,int map) {
 		super(canvas);
@@ -49,6 +51,7 @@ public class Level extends BaseScreen {
 		this.worldWidth = Screen.TILES_SIZE * maxWorldColumns; // 1536
 		this.worldHeight = Screen.TILES_SIZE * maxWorldRow; // 816
 		this.tile = new TileManager(maxWorldRow, maxWorldColumns, MainController.COLLISIONS_PATH + levelRelativePath);
+		this.levelRelativePath=levelRelativePath;
 		this.player = player;
 		this.entityList=new ArrayList<>();
 		this.ui=new Ui();
@@ -60,20 +63,30 @@ public class Level extends BaseScreen {
 	}
 
 	public void update() {
-		player.move(CollisionChecker.getInstance(), tile,player, objects,enemies);
 
-		for(int i=0;i<enemies.size();i++){
-			enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects,enemies);
+		if(gameState==playState){
+			player.move(CollisionChecker.getInstance(), tile,player, objects,enemies);
+
+			for(int i=0;i<enemies.size();i++){
+				enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects,enemies);
+			}
+			if(player.getLifes() <= 0){
+				gameState = gameOverState;
+
+			}
 		}
-		if(player.getLifes() <= 0){
-			gameState = gameOverState;
+		if(gameState==gameOverState){
 
 		}
+
 
 	}
 
 	public  void retry(){
 		player.setDefault();
+		enemies.clear();
+		objects = new EntityGame[4];
+		tile = new TileManager(maxWorldRow, maxWorldCol, MainController.COLLISIONS_PATH + levelRelativePath);
 		assetSetter.setObject(objects,enemies,tile.getValidPositions());
 	}
 
@@ -113,7 +126,7 @@ public class Level extends BaseScreen {
 		}
 
 		//ui
-		ui.Draw(graphicsContext,player, gameState, gameOverState);
+		ui.Draw(graphicsContext,player, gameState, gameOverState,playState);
 
 		//debug
 		if(KeyHandler.getInstance().isDrawTime()){
@@ -148,16 +161,16 @@ public class Level extends BaseScreen {
 
 	@Override
 	public void onKeyPressed(KeyEvent event) {
-		KeyHandler.getInstance().keyPressed(event);
+		KeyHandler.getInstance().keyPressed(event,this);
 	}
-
+/*
 	public  void onGameOverEvent(KeyEvent event){
 		KeyHandler.getInstance().gameOverState(event,this);
 	}
-
+*/
 	@Override
 	public void onKeyReleased(KeyEvent event) {
-		KeyHandler.getInstance().keyReleased(event);
+		KeyHandler.getInstance().keyReleased(event,this);
 	}
 
 

@@ -71,7 +71,7 @@ public class TileManager {
 					mapTileNum[row][col] = num;
 					col++;
 					if(!tile[num].isCollision()){
-						validPositions.add(new Point(row, col));
+						validPositions.add(new Point(col,row));
 					}
 				}
 				if (col == maxWorldCol) {

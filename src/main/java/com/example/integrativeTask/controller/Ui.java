@@ -26,12 +26,12 @@ public class Ui {
 
     }
 
-    public void Draw(GraphicsContext g, Player player, int gameState, int gameOverState ){
+    public void Draw(GraphicsContext g, Player player, int gameState, int gameOverState, int gamePlaystate ){
 
-
-        drawPlayerLife(g,player);
-        drawPlayerInventary(g,player);
-
+        if(gameState==gamePlaystate){
+            drawPlayerLife(g,player);
+            drawPlayerInventary(g,player);
+        }
         if(gameState == gameOverState){
             drawGameOverScreen(g);
         }
