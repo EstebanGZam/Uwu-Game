@@ -5,6 +5,7 @@ import com.example.integrativeTask.control.TileManager;
 import com.example.integrativeTask.controller.CollisionChecker;
 import com.example.integrativeTask.controller.KeyHandler;
 import com.example.integrativeTask.controller.MainController;
+import com.example.integrativeTask.screens.Level;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -48,6 +49,7 @@ public class Player extends EntityGame {
 		setLifes(3);
 		setSpeed(4);
 		setDirection("down");
+
 	}
 
 
@@ -121,6 +123,7 @@ public class Player extends EntityGame {
 		graphicsContext.drawImage(image, ScreenX, ScreenY, 48, 48);
 	}
 
+	//actualizacion de la clase player, esto es mover y actualizacion de estados.
 	@Override
 	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] objects,ArrayList<EntityGame> Enemies) {
 		KeyHandler keyHandler = KeyHandler.getInstance();
@@ -171,6 +174,7 @@ public class Player extends EntityGame {
 			  invincibleCounter=0;
 		  }
 	  }
+
 	}
 
 	public void pickObject(int i,EntityGame [] objects){

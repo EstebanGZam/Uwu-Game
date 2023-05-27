@@ -36,6 +36,10 @@ public class Level extends BaseScreen {
 	private Rectangle mouseRect;
 	private  double mouseRectX;
 	private double mouseRectY;
+	public int gameState;
+	public final int playState = 1;
+
+	public final int gameOverState = 2;
 
 
 	public Level(int maxWorldColumns, int maxWorldRow, Canvas canvas, String levelRelativePath, Player player,int map) {
@@ -51,6 +55,7 @@ public class Level extends BaseScreen {
 		this.assetSetter = new AssetSetter(map);
 		assetSetter.setObject(objects,enemies,tile.getValidPositions());
 		mouseRect = new Rectangle(mouseRectX, mouseRectY, 20,20);
+		gameState = playState;
 
 	}
 
@@ -60,6 +65,16 @@ public class Level extends BaseScreen {
 		for(int i=0;i<enemies.size();i++){
 			enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects,enemies);
 		}
+		if(player.getLifes() <= 0){
+			gameState = gameOverState;
+
+		}
+
+	}
+
+	public  void retry(){
+		player.setDefault();
+		assetSetter.setObject(objects,enemies,tile.getValidPositions());
 	}
 
 	@Override
@@ -90,7 +105,7 @@ public class Level extends BaseScreen {
 		}
 
 		//Draw pointer
-		graphicsContext.setFill(Color.RED);
+		graphicsContext.setFill(Color.WHITE);
 		graphicsContext.fillRect(mouseRectX, mouseRectY,mouseRect.getWidth(),mouseRect.getHeight());
 
 		for(int i=0;i<entityList.size(); i++){
@@ -98,7 +113,7 @@ public class Level extends BaseScreen {
 		}
 
 		//ui
-		ui.Draw(graphicsContext,player);
+		ui.Draw(graphicsContext,player, gameState, gameOverState);
 
 		//debug
 		if(KeyHandler.getInstance().isDrawTime()){
@@ -136,6 +151,10 @@ public class Level extends BaseScreen {
 		KeyHandler.getInstance().keyPressed(event);
 	}
 
+	public  void onGameOverEvent(KeyEvent event){
+		KeyHandler.getInstance().gameOverState(event,this);
+	}
+
 	@Override
 	public void onKeyReleased(KeyEvent event) {
 		KeyHandler.getInstance().keyReleased(event);
@@ -156,5 +175,13 @@ public class Level extends BaseScreen {
 
 	public void setObjects(EntityGame[] objects) {
 		this.objects = objects;
+	}
+
+	public Ui getUi() {
+		return ui;
+	}
+
+	public void setUi(Ui ui) {
+		this.ui = ui;
 	}
 }

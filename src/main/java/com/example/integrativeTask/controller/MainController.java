@@ -33,6 +33,7 @@ public class MainController implements Initializable {
 	private GraphicsContext graphics;
 
 
+
 	@FXML
 	private Music music;
 	private boolean isRunning;
@@ -50,6 +51,7 @@ public class MainController implements Initializable {
 		canvas.setFocusTraversable(true);
 		soundtrack();
 		printInCanvas();
+
 		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player,1));
 		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player,3));
 		initEvents();

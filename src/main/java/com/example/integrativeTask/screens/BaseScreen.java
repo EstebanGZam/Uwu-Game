@@ -18,4 +18,6 @@ public abstract class BaseScreen {
 	public abstract void onKeyPressed(KeyEvent event);
 
 	public abstract void onKeyReleased(KeyEvent event);
+
+
 }
