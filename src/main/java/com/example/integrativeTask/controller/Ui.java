@@ -66,7 +66,7 @@ public class Ui {
 
 
         g.setFont(new Font("Arial", 50));
-        text = "Enter to Play Again";
+        text = "Space to Play Again";
         x = getXForCenteredText(g,text);
         y += Screen.TILES_SIZE*4;
         g.fillText(text,x,y);
