@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class TileManager {
 	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\tiles-sprites";
-	private final int TILES_AMOUNT = 10;
+	private final int TILES_AMOUNT = 12;
 
 	private Tile[] tile;
 
@@ -28,7 +28,7 @@ public class TileManager {
 		this.stagePath = stagePath;
 		this.maxWorldCol = columns;
 		this.maxWorldRow = rows;
-		validPositions= new ArrayList<>();
+		validPositions = new ArrayList<>();
 		tile = new Tile[TILES_AMOUNT];
 		mapTileNum = new int[rows][columns];
 		initializeTilesImages();
@@ -39,11 +39,14 @@ public class TileManager {
 
 		for (int i = 0; i < TILES_AMOUNT; i++) {
 			tile[i] = new Tile(getTileImage("\\tile_" + i + ".png"));
+			if (i > 6) tile[i].setCollision(true);
 		}
 
-		tile[7].setCollision(true);
-		tile[8].setCollision(true);
-		tile[9].setCollision(true);
+//		tile[7].setCollision(true);
+//		tile[8].setCollision(true);
+//		tile[9].setCollision(true);
+//		tile[10].setCollision(true);
+//		tile[11].setCollision(true);
 
 	}
 
@@ -70,8 +73,8 @@ public class TileManager {
 
 					mapTileNum[row][col] = num;
 					col++;
-					if(!tile[num].isCollision()){
-						validPositions.add(new Point(col,row));
+					if (!tile[num].isCollision()) {
+						validPositions.add(new Point(col, row));
 					}
 				}
 				if (col == maxWorldCol) {
@@ -96,7 +99,7 @@ public class TileManager {
 			int worldX = col * 48;
 			int worldY = row * 48;
 			int screenInX = worldX - playerX + screenX;
-			int screenInY = worldY - playerY + screenY+2;
+			int screenInY = worldY - playerY + screenY + 2;
 
 			if (worldX + 48 > playerX - screenX && worldX - 48 < playerX + screenX
 					&& worldY + 48 > playerY - screenY && worldY - 48 < playerY + screenY) {

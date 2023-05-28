@@ -14,8 +14,6 @@ public class AssetSetter {
 
     private int map;
 
-
-
     public AssetSetter(int map){
       this.map=map;
     }

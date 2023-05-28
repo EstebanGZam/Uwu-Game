@@ -1,24 +1,19 @@
 package com.example.integrativeTask.control;
 
-import com.example.integrativeTask.control.EntityGame;
-import com.example.integrativeTask.control.TileManager;
 import com.example.integrativeTask.controller.CollisionChecker;
 import com.example.integrativeTask.controller.KeyHandler;
 import com.example.integrativeTask.controller.MainController;
-import com.example.integrativeTask.screens.Level;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 
 public class Player extends EntityGame {
 
 	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\16x16-RPG-characters\\sprites\\new-style";
 
-    private boolean invincible;
+	private boolean invincible;
 
 	public int invincibleCounter;
 	GraphicsContext gr;
@@ -26,10 +21,10 @@ public class Player extends EntityGame {
 	private final int ScreenX = 768 / 2 - (48 / 2);
 	private final int ScreenY = 560 / 2 - (48 / 2);
 
-	private ArrayList<EntityGame> inventory=new ArrayList<>();
+	private ArrayList<EntityGame> inventory = new ArrayList<>();
 
 	public Player(int x, int y, int speed, int lives, GraphicsContext gr) {
-		super(x, y, speed,lives);
+		super(x, y, speed, lives);
 		this.gr = gr;
 		area = new Rectangle();
 		area.x = 7;
@@ -55,21 +50,21 @@ public class Player extends EntityGame {
 
 	public void getPlayerImage() {
 
-		for(int i=1;i<=3;i++){
-			getImages().add(new Image(TILES_PATH+"\\up"+i+".png"));
+		for (int i = 1; i <= 3; i++) {
+			getImages().add(new Image(TILES_PATH + "\\up" + i + ".png"));
 		}
-		for(int i=1;i<=3;i++){
-			getImages().add(new Image(TILES_PATH+"\\down"+i+".png"));
+		for (int i = 1; i <= 3; i++) {
+			getImages().add(new Image(TILES_PATH + "\\down" + i + ".png"));
 		}
-		for(int i=1;i<=3;i++){
-			getImages().add(new Image(TILES_PATH+"\\left"+i+".png"));
+		for (int i = 1; i <= 3; i++) {
+			getImages().add(new Image(TILES_PATH + "\\left" + i + ".png"));
 		}
-		for(int i=1;i<=3;i++){
-			getImages().add(new Image(TILES_PATH+"\\right"+i+".png"));
+		for (int i = 1; i <= 3; i++) {
+			getImages().add(new Image(TILES_PATH + "\\right" + i + ".png"));
 		}
 	}
 
-@Override
+	@Override
 	public void print(GraphicsContext graphicsContext, Player player) {
 
 		Image image = null;
@@ -125,7 +120,7 @@ public class Player extends EntityGame {
 
 	//actualizacion de la clase player, esto es mover y actualizacion de estados.
 	@Override
-	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] objects,ArrayList<EntityGame> Enemies) {
+	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> Enemies) {
 		KeyHandler keyHandler = KeyHandler.getInstance();
 		if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
 				keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
@@ -141,11 +136,11 @@ public class Player extends EntityGame {
 
 			setCollisionOn(false);
 			collisionChecker.checkTile(this, tile);
-			int objIndex=collisionChecker.checkObject(this,true,objects);
-			pickObject(objIndex,objects);
+			int objIndex = collisionChecker.checkObject(this, true, objects);
+			pickObject(objIndex, objects);
 
-			int monsterIndex=collisionChecker.checkEntity(this,Enemies);
-			contactEnemy(monsterIndex,Enemies);
+			int monsterIndex = collisionChecker.checkEntity(this, Enemies);
+			contactEnemy(monsterIndex, Enemies);
 
 			if (!isCollisionOn()) {
 				switch (getDirection()) {
@@ -167,26 +162,26 @@ public class Player extends EntityGame {
 				setSpriteCounter(0);
 			}
 		}
-      if(invincible){
-		  invincibleCounter++;
-		  if(invincibleCounter>60){
-			  invincible=false;
-			  invincibleCounter=0;
-		  }
-	  }
+		if (invincible) {
+			invincibleCounter++;
+			if (invincibleCounter > 60) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		}
 
 	}
 
-	public void pickObject(int i,EntityGame [] objects){
-		if(i!=999){
-			switch (objects[i].getName()){
+	public void pickObject(int i, EntityGame[] objects) {
+		if (i != 999) {
+			switch (objects[i].getName()) {
 				case "AK-47":
-					if(inventory.size()<2){
+					if (inventory.size() < 2) {
 						inventory.add(objects[i]);
 					}
 					objects[i] = null;
 					break;
-				case  "portal":
+				case "portal":
 					objects[i] = null;
 					MainController.LEVEL++;
 					setDefault();
@@ -197,11 +192,11 @@ public class Player extends EntityGame {
 
 	}
 
-	public void contactEnemy(int i , ArrayList<EntityGame> enemies){
-		if(i!=999) {
-			if(!invincible){
-				setLifes(getLifes()-1);
-				invincible=true;
+	public void contactEnemy(int i, ArrayList<EntityGame> enemies) {
+		if (i != 999) {
+			if (!invincible) {
+				setLifes(getLifes() - 1);
+				invincible = true;
 			}
 
 		}

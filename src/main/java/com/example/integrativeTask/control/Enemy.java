@@ -1,7 +1,6 @@
 package com.example.integrativeTask.control;
 
 import com.example.integrativeTask.controller.CollisionChecker;
-import com.example.integrativeTask.controller.KeyHandler;
 import com.example.integrativeTask.controller.MainController;
 import com.example.integrativeTask.screens.Screen;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,8 +16,8 @@ public class Enemy extends EntityGame{
 
     public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\enemy";
 
-    public Enemy(int x, int y, int speed, int lifes) {
-        super(x, y, speed, lifes);
+    public Enemy(int x, int y, int speed, int lives) {
+        super(x, y, speed, lives);
         actionCounter=0;
         area = new Rectangle();
         area.x = 7;
@@ -27,10 +26,10 @@ public class Enemy extends EntityGame{
         area.height = 32;
         setSolidAreaDefaultX(area.x);
         setSolidAreaDefaultY(area.y);
-        getPlayerEnmy();
+        getPlayerEnemy();
     }
 
-    public void getPlayerEnmy() {
+    public void getPlayerEnemy() {
 
         for(int i=1;i<=2;i++){
             getImages().add(new javafx.scene.image.Image(TILES_PATH+"\\up"+i+".png"));
