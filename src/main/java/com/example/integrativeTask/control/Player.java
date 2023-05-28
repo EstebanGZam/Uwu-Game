@@ -200,7 +200,7 @@ public class Player extends EntityGame {
 			if (i != 999) {
 				switch (inventory.get(i-1).getName()) {
 					case "AK-47":
-						return 12;
+						return 8;
 					case "pistol":
 						return  8;
 				}

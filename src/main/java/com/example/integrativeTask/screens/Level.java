@@ -143,8 +143,8 @@ public class Level extends BaseScreen {
 				Bullet actualBullet = bullets.get(j);
 
 				double distance = Math.sqrt(
-						Math.pow(actualEnemy.getWorldX() - actualBullet.getPositionX(), 2) +
-								Math.pow(actualEnemy.getWorldY() - actualBullet.getPositionY(), 2)
+						Math.pow(actualBox.getWorldX() - actualBullet.getPositionX(), 2) +
+								Math.pow(actualBox.getWorldY() - actualBullet.getPositionY(), 2)
 				);
 
 				if (distance <= 10){
@@ -213,8 +213,8 @@ public class Level extends BaseScreen {
 	public void onMousePressed(MouseEvent event) {
 
 		if(player.getTypeGun() != 0){
-			double diffX = event.getX() - player.getWorldX();
-			double diffY = event.getY() - player.getWorldY();
+			double diffX = event.getX() - player.getScreenX();
+			double diffY = event.getY() - player.getScreenY();
 
 			Vector diff = new Vector(diffX, diffY);
 
@@ -226,7 +226,7 @@ public class Level extends BaseScreen {
 			}
 
 			bullets.add(
-					new Bullet(player.getWorldX(),player.getWorldY(),speed,1,canvas,diffX,diffY)
+					new Bullet(player.getScreenX(),player.getScreenY(),speed,1,canvas,diffX,diffY)
 			);
 		}
 	}

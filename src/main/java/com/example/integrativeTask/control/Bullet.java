@@ -16,7 +16,7 @@ public class Bullet extends  EntityGame{
         this.graphicsContext = canvas.getGraphicsContext2D();
         this.position = new Vector(x,y);
         this.direction =  new Vector(xDirection,yDirection);
-        this.size = 10;
+        this.size = 8;
         this.speed = speed;
 
     }
