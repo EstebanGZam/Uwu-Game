@@ -23,6 +23,8 @@ public class Player extends EntityGame {
 
 	private ArrayList<EntityGame> inventory = new ArrayList<>();
 
+	int typeGun = 0;
+
 	public Player(int x, int y, int speed, int lives, GraphicsContext gr) {
 		super(x, y, speed, lives);
 		this.gr = gr;
@@ -46,6 +48,7 @@ public class Player extends EntityGame {
 		setDirection("down");
 
 	}
+
 
 
 	public void getPlayerImage() {
@@ -175,7 +178,7 @@ public class Player extends EntityGame {
 	public void pickObject(int i, EntityGame[] objects) {
 		if (i != 999) {
 			switch (objects[i].getName()) {
-				case "AK-47":
+				case "AK-47", "pistol":
 					if (inventory.size() < 2) {
 						inventory.add(objects[i]);
 					}
@@ -190,6 +193,22 @@ public class Player extends EntityGame {
 
 		}
 
+	}
+
+	public int gunActual(int i) {
+		if(inventory != null){
+			if (i != 999) {
+				switch (inventory.get(i-1).getName()) {
+					case "AK-47":
+						return 12;
+					case "pistol":
+						return  8;
+				}
+
+			}
+			return 10;
+		}
+		return 10;
 	}
 
 	public void contactEnemy(int i, ArrayList<EntityGame> enemies) {
@@ -226,5 +245,13 @@ public class Player extends EntityGame {
 
 	public void setInvincible(boolean invincible) {
 		this.invincible = invincible;
+	}
+
+	public int getTypeGun() {
+		return typeGun;
+	}
+
+	public void setTypeGun(int typeGun) {
+		this.typeGun = typeGun;
 	}
 }

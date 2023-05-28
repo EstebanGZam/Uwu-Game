@@ -33,7 +33,7 @@ public class AssetSetter {
                 break;
             case 2:
                 //}enemies=7;
-                objects[0]= new Object("\\2.png", 48*18,48*16,0,"pistol ",1.5);
+                objects[0]= new Object("\\2.png", 48*18,48*16,0,"pistol",1.5);
                 objects[0].setCollisionOn(true);
                 objects[1]= new Object("\\portal.png", 48*19,48*21,0,"portal",1.5);
                 objects[1].setCollisionOn(true);

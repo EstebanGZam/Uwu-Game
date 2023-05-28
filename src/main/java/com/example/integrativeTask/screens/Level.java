@@ -1,9 +1,7 @@
 package com.example.integrativeTask.screens;
 
-import com.example.integrativeTask.control.EntityGame;
+import com.example.integrativeTask.control.*;
 import com.example.integrativeTask.control.Object;
-import com.example.integrativeTask.control.Player;
-import com.example.integrativeTask.control.TileManager;
 import com.example.integrativeTask.controller.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
@@ -25,6 +23,7 @@ public class Level extends BaseScreen {
 
 	private ArrayList <EntityGame> entityList;
 
+	private ArrayList<Bullet> bullets = new ArrayList<>();
 	private EntityGame []  objects = new EntityGame[4];;
 
 	private ArrayList<EntityGame>  enemies= new ArrayList<>();
@@ -126,6 +125,43 @@ public class Level extends BaseScreen {
 		//ui
 		ui.Draw(graphicsContext,player, gameState, gameOverState,playState);
 
+		//shot
+		for (int i = 0; i< bullets.size(); i++){
+			bullets.get(i).paint();
+
+			if(bullets.get(i).getPositionX() > canvas.getWidth()){
+				bullets.remove(i);
+				i--;
+			}
+		}
+
+		for (int i = 0; i< enemies.size(); i++){
+			for (int j = 0; j < bullets.size(); j++){
+
+				EntityGame actualBox = enemies.get(i);
+				Enemy actualEnemy=(Enemy) actualBox;
+				Bullet actualBullet = bullets.get(j);
+
+				double distance = Math.sqrt(
+						Math.pow(actualEnemy.getWorldX() - actualBullet.getPositionX(), 2) +
+								Math.pow(actualEnemy.getWorldY() - actualBullet.getPositionY(), 2)
+				);
+
+				if (distance <= 10){
+					EntityGame deletedBox ;
+					if(actualEnemy.getLifes() == 0){
+						deletedBox = enemies.remove(i);
+					}
+					enemies.get(i).setLifes(enemies.get(i).getLifes() -1);
+
+					bullets.remove(j);
+					return;
+				}
+
+			}
+		}
+
+
 		//debug
 		if(KeyHandler.getInstance().isDrawTime()){
 			long drawEnd =System.nanoTime();
@@ -134,6 +170,9 @@ public class Level extends BaseScreen {
 		}
 
 	}
+
+
+
 
 	public void addEntity(){
 		entityList.add(player);
@@ -170,6 +209,27 @@ public class Level extends BaseScreen {
 	public void onKeyReleased(KeyEvent event) {
 		KeyHandler.getInstance().keyReleased(event,this);
 	}
+	@Override
+	public void onMousePressed(MouseEvent event) {
+
+		if(player.getTypeGun() != 0){
+			double diffX = event.getX() - player.getWorldX();
+			double diffY = event.getY() - player.getWorldY();
+
+			Vector diff = new Vector(diffX, diffY);
+
+			diff.normalize();
+			diff.setSpeed(4);
+			int speed = player.gunActual(player.getTypeGun());
+			if(bullets != null){
+				System.out.println("se estan creando las balas");
+			}
+
+			bullets.add(
+					new Bullet(player.getWorldX(),player.getWorldY(),speed,1,canvas,diffX,diffY)
+			);
+		}
+	}
 
 
 	public  void mouseMoved(MouseEvent mouseEvent ){
@@ -194,5 +254,9 @@ public class Level extends BaseScreen {
 
 	public void setUi(Ui ui) {
 		this.ui = ui;
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 }

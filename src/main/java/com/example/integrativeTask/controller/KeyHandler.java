@@ -23,6 +23,19 @@ public class KeyHandler {
 			   case S -> downPressed = true;
 			   case A -> leftPressed = true;
 			   case D -> rightPressed = true;
+			   case C -> {
+				   if(level.getPlayer().getInventory().size() == 0){
+					   
+				   } else if (level.getPlayer().getTypeGun() > level.getPlayer().getInventory().size() ) {
+					   level.getPlayer().setTypeGun(0);
+					   System.out.println("se quito el arma, ahora no tienes arma");
+					   
+				   } else {
+					   level.getPlayer().setTypeGun(level.getPlayer().getTypeGun()+1);
+					   System.out.println("se cambio el arma");
+				   }
+
+			   }
 			   case T -> {
 				   if(drawTime==false){
 					   drawTime=true;

@@ -13,7 +13,7 @@ import java.util.Random;
 public class Enemy extends EntityGame{
 
     int actionCounter;
-
+    Vector position;
     public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\enemy";
 
     public Enemy(int x, int y, int speed, int lives) {
@@ -27,6 +27,7 @@ public class Enemy extends EntityGame{
         setSolidAreaDefaultX(area.x);
         setSolidAreaDefaultY(area.y);
         getPlayerEnemy();
+        position = new Vector(x,y);
     }
 
     public void getPlayerEnemy() {
@@ -43,6 +44,14 @@ public class Enemy extends EntityGame{
         for(int i=1;i<=2;i++){
             getImages().add(new Image(TILES_PATH+"\\right"+i+".png"));
         }
+    }
+
+    public Vector getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector position) {
+        this.position = position;
     }
 
     public void setAction(){

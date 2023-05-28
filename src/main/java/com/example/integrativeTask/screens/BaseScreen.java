@@ -3,6 +3,7 @@ package com.example.integrativeTask.screens;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public abstract class BaseScreen {
 	protected Canvas canvas;
@@ -18,6 +19,8 @@ public abstract class BaseScreen {
 	public abstract void onKeyPressed(KeyEvent event);
 
 	public abstract void onKeyReleased(KeyEvent event);
+
+	public abstract  void onMousePressed(MouseEvent event);
 
 
 }

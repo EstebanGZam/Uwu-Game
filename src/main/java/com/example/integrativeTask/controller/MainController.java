@@ -20,7 +20,7 @@ public class MainController implements Initializable {
 	public static final String IMAGES_PATH = MAIN_RESOURCES_PATH + "\\images";
 	public static final String AUDIO_PATH = MAIN_RESOURCES_PATH + "\\audio";
 	public static final String COLLISIONS_PATH = MAIN_RESOURCES_PATH + "\\collisions";
-	public static int LEVEL = 1;
+	public static int LEVEL = 0;
 	private ArrayList<Level> levels;
 	private Player player;
 
@@ -111,6 +111,12 @@ public class MainController implements Initializable {
 		canvas.setOnMouseMoved(mouseEvent -> {
 
 			levels.get(LEVEL).mouseMoved(mouseEvent);
+
+		});
+
+		canvas.setOnMousePressed(mouseEvent -> {
+
+			levels.get(LEVEL).onMousePressed(mouseEvent);
 
 		});
 
