@@ -121,9 +121,7 @@ public class Level extends BaseScreen {
 		graphicsContext.setFill(Color.WHITE);
 		graphicsContext.fillRect(mouseRectX, mouseRectY,mouseRect.getWidth(),mouseRect.getHeight());
 
-		for(int i=0;i<entityList.size(); i++){
-			entityList.remove(i);
-		}
+		entityList.clear();
 
 		//ui
 		ui.Draw(graphicsContext,player, gameState, gameOverState,playState);
