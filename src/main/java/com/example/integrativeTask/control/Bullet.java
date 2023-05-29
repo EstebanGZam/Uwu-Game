@@ -53,7 +53,21 @@ public class Bullet extends  EntityGame{
 
 
         } else {
-            // Resto de lógica para otros casos
+            setCollisionOn(false);
+            CollisionChecker.getInstance().checkTile(this, level.getTile());
+            if(isCollisionOn()){
+                isLive=false;
+            }
+            boolean collisionPlayer=CollisionChecker.getInstance().checkPlayer(this,level.getPlayer());
+            if (collisionPlayer){
+                if(!level.getPlayer().isInvincible()){
+                    int x=level.getPlayer().getLifes()-1;
+                    level.getPlayer().setLifes(x);
+                    level.getPlayer().setInvincible(true);
+                    isLive=false;
+                }
+            }
+
         }
 
         position.setX(position.getX() + direction.getX());

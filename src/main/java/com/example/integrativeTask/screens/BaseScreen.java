@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public abstract class BaseScreen {
-	protected Canvas canvas;
+	public static Canvas canvas;
 	protected GraphicsContext graphicsContext;
 
 	public BaseScreen(Canvas canvas) {

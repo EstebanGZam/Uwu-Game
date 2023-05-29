@@ -64,10 +64,10 @@ public class Level extends BaseScreen {
 	public void update() {
 
 		if(gameState==playState){
-			player.move(CollisionChecker.getInstance(), tile,player, objects,enemies);
+			player.move(CollisionChecker.getInstance(), tile,player, objects,enemies,this);
 
 			for(int i=0;i<enemies.size();i++){
-				enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects,enemies);
+				enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects,enemies,this);
 			}
 			for (int i = 0; i< bullets.size(); i++) {
 				if(!bullets.get(i).isLive){

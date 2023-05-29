@@ -1,6 +1,7 @@
 package com.example.integrativeTask.control;
 
 import com.example.integrativeTask.controller.CollisionChecker;
+import com.example.integrativeTask.screens.Level;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -41,7 +42,7 @@ public abstract class EntityGame {
 
 	}
 
-	public void move(CollisionChecker collisionChecker, TileManager tile,Player player,EntityGame[] object,ArrayList<EntityGame> enemies) {
+	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] object, ArrayList<EntityGame> enemies, Level level) {
 	}
 
 

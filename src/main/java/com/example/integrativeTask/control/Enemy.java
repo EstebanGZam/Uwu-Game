@@ -2,6 +2,8 @@ package com.example.integrativeTask.control;
 
 import com.example.integrativeTask.controller.CollisionChecker;
 import com.example.integrativeTask.controller.MainController;
+import com.example.integrativeTask.screens.BaseScreen;
+import com.example.integrativeTask.screens.Level;
 import com.example.integrativeTask.screens.Screen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -58,7 +60,7 @@ public class Enemy extends EntityGame{
         this.position = position;
     }
 
-    public void setAction(){
+    public void setAction(Level level){
         actionCounter++;
         if(actionCounter==120){
             Random random = new Random();
@@ -78,11 +80,26 @@ public class Enemy extends EntityGame{
             }
             actionCounter=0;
         }
-    }
+        int i = new Random().nextInt(100)+1;
+            if(i>99){
+                double playerScreenX = getWorldX();
+                double playerScreenY = getWorldY();
+                int x= new Random().nextInt(Screen.SCREEN_WIDTH)+1;
+                int y= new Random().nextInt(Screen.SCREEN_HEIGHT)+1;
+                double diffX = x - playerScreenX;
+                double diffY = y - playerScreenY;
+                Vector diff = new Vector(diffX, diffY);
+                diff.normalize();
+                diff.setSpeed(4);
+                Vector diffEnemy = new Vector(getWorldX(), getWorldY());
+
+               level.getBullets().add(new Bullet(getWorldX(), getWorldY(),4, 1, BaseScreen.canvas, diffEnemy, diff, this));
+            }
+        }
 
     @Override
-    public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> enemies) {
-        setAction();
+    public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> enemies, Level level) {
+        setAction(level);
             setCollisionOn(false);
             collisionChecker.checkTile(this, tile);
             boolean collisionPlayer=collisionChecker.checkPlayer(this,player);

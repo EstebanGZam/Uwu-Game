@@ -121,7 +121,7 @@ public class Player extends EntityGame {
 
 	//actualizacion de la clase player, esto es mover y actualizacion de estados.
 	 @Override
-	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> Enemies) {
+	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> Enemies, Level level) {
 		KeyHandler keyHandler = KeyHandler.getInstance();
 		if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
 				keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
