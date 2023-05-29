@@ -34,6 +34,8 @@ public class MainController implements Initializable {
 	private Music music;
 	private boolean isRunning;
 
+	public static boolean reset;
+
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		start();
@@ -41,6 +43,7 @@ public class MainController implements Initializable {
 
 	private void start() {
 		graphics = canvas.getGraphicsContext2D();
+		reset=false;
 		isRunning = true;
 		levels = new ArrayList<>();
 		player = new Player(100, 100, 4, 3, canvas.getGraphicsContext2D());
@@ -90,6 +93,10 @@ public class MainController implements Initializable {
 					levels.get(LEVEL).paint();
 				}
 
+				if(reset){
+					resetGame();
+				}
+
 				// Calcular el tiempo de espera antes del siguiente fotograma
 				long remainingTime = targetFrameTime - (System.currentTimeMillis() - lastDrawTime);
 				if (remainingTime > 0) {
@@ -103,6 +110,7 @@ public class MainController implements Initializable {
 		canvas.setOnKeyPressed(event -> {
 			if (event.getCode().equals(KeyCode.ENTER)) run();
 			levels.get(LEVEL).onKeyPressed(event);
+			setRunning(true);
 		});
 		canvas.setOnKeyReleased(event -> {
 			levels.get(LEVEL).onKeyReleased(event);
@@ -132,6 +140,31 @@ public class MainController implements Initializable {
 
 	public void setRunning(boolean running) {
 		isRunning = running;
+	}
+
+	public void resetGameIn(){
+		LEVEL=0;
+		graphics = canvas.getGraphicsContext2D();
+		reset=false;
+		isRunning = false;
+		levels = new ArrayList<>();
+		player = new Player(100, 100, 4, 3, canvas.getGraphicsContext2D());
+		canvas.setFocusTraversable(true);
+		soundtrack();
+		printInCanvas();
+
+		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player, 1));
+		levels.add(new Level(44, 30, canvas, "\\Level-2.txt", player, 2));
+		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player, 3));
+		initEvents();
+	}
+
+	public  void resetGame() {
+		// Detener el hilo del juego
+		setRunning(false);
+		player = new Player(100, 100, 4, 3, canvas.getGraphicsContext2D());
+		graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		resetGameIn();
 	}
 
 }

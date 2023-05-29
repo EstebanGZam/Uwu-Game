@@ -40,6 +40,8 @@ public class Level extends BaseScreen {
 
 	public final int gameOverState = 2;
 
+	public final int gameWinState = 3;
+
 	private String levelRelativePath;
 
 
@@ -64,6 +66,7 @@ public class Level extends BaseScreen {
 	public void update() {
 
 		if(gameState==playState){
+			portalUpdate();
 			player.move(CollisionChecker.getInstance(), tile,player, objects,enemies,this);
 
 			for(int i=0;i<enemies.size();i++){
@@ -84,6 +87,9 @@ public class Level extends BaseScreen {
 		if(gameState==gameOverState){
 
 		}
+		if(gameState==gameWinState){
+
+		}
 
 
 	}
@@ -91,9 +97,11 @@ public class Level extends BaseScreen {
 	public  void retry(){
 		player.setDefault();
 		enemies.clear();
-		objects = new EntityGame[4];
+		bullets.clear();
 		tile = new TileManager(maxWorldRow, maxWorldCol, MainController.COLLISIONS_PATH + levelRelativePath);
 		assetSetter.setObject(objects,enemies,tile.getValidPositions());
+		gameState = playState;
+
 	}
 
 	@Override
@@ -130,7 +138,7 @@ public class Level extends BaseScreen {
 		entityList.clear();
 
 		//ui
-		ui.Draw(graphicsContext,player, gameState, gameOverState,playState);
+		ui.Draw(graphicsContext,player, gameState, gameOverState,playState,gameWinState);
 
 		//shot
 		for (int i = 0; i< bullets.size(); i++){
@@ -211,6 +219,19 @@ public class Level extends BaseScreen {
 			mouseRectX = mouseEvent.getX();
 			mouseRectY = mouseEvent.getY();
 
+
+	}
+
+	public void portalUpdate(){
+		if(enemies.size()==0){
+			System.out.println(MainController.LEVEL);
+			if(MainController.LEVEL==2){
+				gameState=gameWinState;
+			}
+			else{
+				objects[1].setCollisionOn(true);
+			}
+		}
 
 	}
 

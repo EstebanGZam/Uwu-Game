@@ -108,7 +108,7 @@ public class CollisionChecker {
 					case "left" -> {
 						entity.getArea().x-= entity.getSpeed();
 						if(entity.getArea().intersects(objects[i].getArea())){
-							System.out.println("Si esta colisionando");
+							System.out.println(objects[i].isCollisionOn());
 							if(objects[i].isCollisionOn()){
 								entity.setCollisionOn(true);
 							}
@@ -120,7 +120,7 @@ public class CollisionChecker {
 					case "right" -> {
 						entity.getArea().x+= entity.getSpeed();
 						if(entity.getArea().intersects(objects[i].getArea())){
-							System.out.println("Si esta colisionando");
+
 							if(objects[i].isCollisionOn()){
 								entity.setCollisionOn(true);
 							}

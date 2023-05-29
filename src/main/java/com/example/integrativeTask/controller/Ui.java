@@ -26,7 +26,7 @@ public class Ui {
 
     }
 
-    public void Draw(GraphicsContext g, Player player, int gameState, int gameOverState, int gamePlaystate ){
+    public void Draw(GraphicsContext g, Player player, int gameState, int gameOverState, int gamePlaystate, int gameWinState  ){
 
         if(gameState==gamePlaystate){
             drawPlayerLife(g,player);
@@ -34,6 +34,8 @@ public class Ui {
         }
         if(gameState == gameOverState){
             drawGameOverScreen(g);
+        }if(gameState==gameWinState ){
+            drawWinrScreen(g);
         }
 
 
@@ -52,6 +54,41 @@ public class Ui {
 
         g.setFont(new Font("Arial", 110));
         text = "GAME OVER";
+
+        g.setFill(Color.BLACK);
+        x = getXForCenteredText(g,text);
+        y = Screen.TILES_SIZE*4;
+
+        g.fillText(text,x,y);
+
+        g.setFill(Color.WHITE);
+        g.fillText(text,x-4,y-4);
+
+        //intentar otra vez.
+
+
+        g.setFont(new Font("Arial", 50));
+        text = "Space to Play Again";
+        x = getXForCenteredText(g,text);
+        y += Screen.TILES_SIZE*4;
+        g.fillText(text,x,y);
+
+        if(commandNum == 0){
+            g.fillText(">",x-40,y);
+
+        }
+
+
+    }
+    public void drawWinrScreen(GraphicsContext g){
+        int x;
+        int y;
+        String text;
+        g.setFill(new Color(0,0,0,0.5));
+        g.fillRect(0,0,Screen.SCREEN_WIDTH,Screen.SCREEN_HEIGHT);
+
+        g.setFont(new Font("Arial", 110));
+        text = "Felcitaciones";
 
         g.setFill(Color.BLACK);
         x = getXForCenteredText(g,text);

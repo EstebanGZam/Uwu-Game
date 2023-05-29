@@ -25,7 +25,7 @@ public class AssetSetter {
                 objects[0].setCollisionOn(true);
 
                 objects[1]= new Object("\\portal.png", 48*19,48*21,0,"portal",1.5);
-                objects[1].setCollisionOn(true);
+                objects[1].setCollisionOn(false);
                 generateEnemies(6,points,enemiesList);
                // Enemy enemy = new Enemy(18*48, 17*48,2,3);
                 //enemiesList.add(enemy);
@@ -36,7 +36,7 @@ public class AssetSetter {
                 objects[0]= new Object("\\2.png", 48*18,48*16,0,"pistol",1.5);
                 objects[0].setCollisionOn(true);
                 objects[1]= new Object("\\portal.png", 48*19,48*21,0,"portal",1.5);
-                objects[1].setCollisionOn(true);
+                objects[1].setCollisionOn(false);
                 generateEnemies(10,points,enemiesList);
                 break;
             case 3:

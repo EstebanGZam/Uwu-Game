@@ -133,7 +133,7 @@ public class Enemy extends EntityGame{
             }
         if (isInvincible()) {
             setInvincibleCounter(getInvincibleCounter()+1);
-            if (getInvincibleCounter() > 80) {
+            if (getInvincibleCounter() > 40) {
                 setInvincible(false);
                 setInvincibleCounter(0);
             }

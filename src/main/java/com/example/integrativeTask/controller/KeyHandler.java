@@ -43,12 +43,22 @@ public class KeyHandler {
 					   drawTime=false;
 				   }
 			   }
+			   case M -> {
+	             level.getEnemies().clear();
+			   }
 		   }
 	   }else if(level.gameState==level.gameOverState){
 		   if(event.getCode()==KeyCode.SPACE){
 			   if (level.getUi().commandNum == 0) {
 				   level.gameState = level.playState;
 				   level.retry();
+			   }
+		   }
+	   }
+	   else if(level.gameState==level.gameWinState){
+		   if(event.getCode()==KeyCode.SPACE){
+			   if (level.getUi().commandNum == 0) {
+                 MainController.reset=true;
 			   }
 		   }
 	   }

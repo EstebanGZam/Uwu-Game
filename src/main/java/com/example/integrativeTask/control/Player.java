@@ -16,6 +16,8 @@ public class Player extends EntityGame {
 
 	GraphicsContext gr;
 
+	public int attack;
+
 	private final int ScreenX = 768 / 2 - (48 / 2);
 	private final int ScreenY = 560 / 2 - (48 / 2);
 
@@ -185,9 +187,9 @@ public class Player extends EntityGame {
 					objects[i] = null;
 					break;
 				case "portal":
-					objects[i] = null;
-					MainController.LEVEL++;
-					setDefault();
+						objects[i] = null;
+						MainController.LEVEL++;
+						setDefault();
 					break;
 			}
 

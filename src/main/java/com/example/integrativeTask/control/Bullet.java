@@ -48,6 +48,7 @@ public class Bullet extends  EntityGame{
 
             int monsterIndex = CollisionChecker.getInstance().checkEntity(this, level.getEnemies());
             if (monsterIndex != 999) {
+
                 level.getPlayer().damageMonster(monsterIndex, 1, level);
             }
 

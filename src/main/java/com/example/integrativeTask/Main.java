@@ -21,6 +21,7 @@ public class Main extends Application {
 		FXMLLoader fxmlLoader = null;
 		try {
 			fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));
+			
 			Scene scene = new Scene(fxmlLoader.load(), Screen.SCREEN_WIDTH, Screen.SCREEN_HEIGHT);
 			Stage stage = new Stage();
 			stage.setTitle(title);
