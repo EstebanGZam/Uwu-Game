@@ -22,6 +22,10 @@ public abstract class EntityGame {
 
 	private String name;
 
+	public boolean invincible;
+
+	public int invincibleCounter;
+
 
 	public EntityGame(int x, int y, int speed,int lifes) {
 		this.worldX = x;
@@ -148,5 +152,21 @@ public abstract class EntityGame {
 
 	public void setMaxlifes(int maxlifes) {
 		Maxlifes = maxlifes;
+	}
+
+	public boolean isInvincible() {
+		return invincible;
+	}
+
+	public void setInvincible(boolean invincible) {
+		this.invincible = invincible;
+	}
+
+	public int getInvincibleCounter() {
+		return invincibleCounter;
+	}
+
+	public void setInvincibleCounter(int invincibleCounter) {
+		this.invincibleCounter = invincibleCounter;
 	}
 }

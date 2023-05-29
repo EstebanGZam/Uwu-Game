@@ -3,6 +3,7 @@ package com.example.integrativeTask.control;
 import com.example.integrativeTask.controller.CollisionChecker;
 import com.example.integrativeTask.controller.KeyHandler;
 import com.example.integrativeTask.controller.MainController;
+import com.example.integrativeTask.screens.Level;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -13,9 +14,6 @@ public class Player extends EntityGame {
 
 	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\16x16-RPG-characters\\sprites\\new-style";
 
-	private boolean invincible;
-
-	public int invincibleCounter;
 	GraphicsContext gr;
 
 	private final int ScreenX = 768 / 2 - (48 / 2);
@@ -122,7 +120,7 @@ public class Player extends EntityGame {
 	}
 
 	//actualizacion de la clase player, esto es mover y actualizacion de estados.
-	@Override
+	 @Override
 	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> Enemies) {
 		KeyHandler keyHandler = KeyHandler.getInstance();
 		if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
@@ -175,6 +173,8 @@ public class Player extends EntityGame {
 
 	}
 
+
+
 	public void pickObject(int i, EntityGame[] objects) {
 		if (i != 999) {
 			switch (objects[i].getName()) {
@@ -202,7 +202,7 @@ public class Player extends EntityGame {
 					case "AK-47":
 						return 8;
 					case "pistol":
-						return  8;
+						return  5;
 				}
 
 			}
@@ -220,6 +220,23 @@ public class Player extends EntityGame {
 
 		}
 
+	}
+
+	public void damageMonster(int i , int attack, Level level){
+		if(i!=999){
+			if(!level.getEnemies().get(i).isInvincible()){
+				int damage= level.getEnemies().get(i).getLifes()-attack;
+				if(damage<0){
+					damage=0;
+				}
+				System.out.println("lo ataco");
+				level.getEnemies().get(i).setLifes(damage);
+				level.getEnemies().get(i).setInvincible(true);
+				if(level.getEnemies().get(i).getLifes()<=0){
+					level.getEnemies().remove(i);
+				}
+			}
+		}
 	}
 
 

@@ -14,6 +14,10 @@ public class Enemy extends EntityGame{
 
     int actionCounter;
     Vector position;
+
+    public boolean invincible;
+
+    public int invincibleCounter;
     public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\enemy";
 
     public Enemy(int x, int y, int speed, int lives) {
@@ -110,6 +114,13 @@ public class Enemy extends EntityGame{
                 }
                 setSpriteCounter(0);
             }
+        if (isInvincible()) {
+            setInvincibleCounter(getInvincibleCounter()+1);
+            if (getInvincibleCounter() > 80) {
+                setInvincible(false);
+                setInvincibleCounter(0);
+            }
+        }
         }
 
 
@@ -164,6 +175,7 @@ public class Enemy extends EntityGame{
             graphicsContext.drawImage(image, screenX, screenY, 48, 48);
         }
     }
+
 
 
 }

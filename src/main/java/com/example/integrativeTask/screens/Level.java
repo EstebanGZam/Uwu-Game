@@ -69,6 +69,13 @@ public class Level extends BaseScreen {
 			for(int i=0;i<enemies.size();i++){
 				enemies.get(i).move(CollisionChecker.getInstance(), tile,player, objects,enemies);
 			}
+			for (int i = 0; i< bullets.size(); i++) {
+				if(!bullets.get(i).isLive){
+					bullets.remove(i);
+				}else{
+					bullets.get(i).update(this);
+				}
+			}
 			if(player.getLifes() <= 0){
 				gameState = gameOverState;
 
@@ -127,38 +134,9 @@ public class Level extends BaseScreen {
 
 		//shot
 		for (int i = 0; i< bullets.size(); i++){
-			bullets.get(i).paint();
+			bullets.get(i).paint(player);
 
-			if(bullets.get(i).getPositionX() > canvas.getWidth()){
-				bullets.remove(i);
-				i--;
-			}
-		}
 
-		for (int i = 0; i< enemies.size(); i++){
-			for (int j = 0; j < bullets.size(); j++){
-
-				EntityGame actualBox = enemies.get(i);
-				Enemy actualEnemy=(Enemy) actualBox;
-				Bullet actualBullet = bullets.get(j);
-
-				double distance = Math.sqrt(
-						Math.pow(actualBox.getWorldX() - actualBullet.getPositionX(), 2) +
-								Math.pow(actualBox.getWorldY() - actualBullet.getPositionY(), 2)
-				);
-
-				if (distance <= 10){
-					EntityGame deletedBox ;
-					if(actualEnemy.getLifes() == 0){
-						deletedBox = enemies.remove(i);
-					}
-					enemies.get(i).setLifes(enemies.get(i).getLifes() -1);
-
-					bullets.remove(j);
-					return;
-				}
-
-			}
 		}
 
 
@@ -212,22 +190,18 @@ public class Level extends BaseScreen {
 	@Override
 	public void onMousePressed(MouseEvent event) {
 
-		if(player.getTypeGun() != 0){
-			double diffX = event.getX() - player.getScreenX();
-			double diffY = event.getY() - player.getScreenY();
-
+		if (player.getTypeGun() != 0) {
+			double playerScreenX = player.getScreenX();
+			double playerScreenY = player.getScreenY();
+			double diffX = event.getX() - playerScreenX;
+			double diffY = event.getY() - playerScreenY;
 			Vector diff = new Vector(diffX, diffY);
-
-			diff.normalize();
-			diff.setSpeed(4);
 			int speed = player.gunActual(player.getTypeGun());
-			if(bullets != null){
-				System.out.println("se estan creando las balas");
-			}
+			diff.normalize();
+            diff.setSpeed(speed);
+			Vector diffPlayer = new Vector(player.getWorldX(), player.getWorldY());
 
-			bullets.add(
-					new Bullet(player.getScreenX(),player.getScreenY(),speed,1,canvas,diffX,diffY)
-			);
+			bullets.add(new Bullet(player.getWorldX(), player.getWorldY(), speed, 1, canvas, diffPlayer, diff, player));
 		}
 	}
 
@@ -258,5 +232,46 @@ public class Level extends BaseScreen {
 
 	public Player getPlayer() {
 		return player;
+	}
+
+
+	public ArrayList<EntityGame> getEntityList() {
+		return entityList;
+	}
+
+	public void setEntityList(ArrayList<EntityGame> entityList) {
+		this.entityList = entityList;
+	}
+
+	public ArrayList<Bullet> getBullets() {
+		return bullets;
+	}
+
+	public void setBullets(ArrayList<Bullet> bullets) {
+		this.bullets = bullets;
+	}
+
+	public ArrayList<EntityGame> getEnemies() {
+		return enemies;
+	}
+
+	public void setEnemies(ArrayList<EntityGame> enemies) {
+		this.enemies = enemies;
+	}
+
+	public AssetSetter getAssetSetter() {
+		return assetSetter;
+	}
+
+	public void setAssetSetter(AssetSetter assetSetter) {
+		this.assetSetter = assetSetter;
+	}
+
+	public TileManager getTile() {
+		return tile;
+	}
+
+	public void setTile(TileManager tile) {
+		this.tile = tile;
 	}
 }
