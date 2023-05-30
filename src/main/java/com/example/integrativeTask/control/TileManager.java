@@ -73,7 +73,7 @@ public class TileManager {
 
 					mapTileNum[row][col] = num;
 					col++;
-					if (!tile[num].isCollision()&&row!=11) {
+					if (!tile[num].isCollision()&&row!=11&&row!=12&&row!=13) {
 							validPositions.add(new Point(col, row));
 
 					}

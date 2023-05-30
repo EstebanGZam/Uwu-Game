@@ -14,6 +14,9 @@ import java.util.Random;
 
 public class Enemy extends EntityGame{
 
+    int fireCounter;
+    int fireDelay = 60;
+
     int actionCounter;
     Vector position;
 
@@ -60,26 +63,28 @@ public class Enemy extends EntityGame{
         this.position = position;
     }
 
-    public void setAction(Level level){
+    public void setAction(Level level) {
         actionCounter++;
-        if(actionCounter==120){
+        fireCounter--;
+        if (actionCounter == 120) {
             Random random = new Random();
-            int i =random.nextInt(100)+1;
+            int i = random.nextInt(100) + 1;
 
-            if(i<=25){
+            if (i <= 25) {
                 setDirection("up");
             }
-            if(i>25 && i<=50){
+            if (i > 25 && i <= 50) {
                 setDirection("down");
             }
-            if(i>50 && i<=75){
+            if (i > 50 && i <= 75) {
                 setDirection("left");
             }
-            if(i>75 && i<=100){
+            if (i > 75 && i <= 100) {
                 setDirection("right");
             }
-            actionCounter=0;
+            actionCounter = 0;
         }
+        /*
         int i = new Random().nextInt(100)+1;
             if(i>99){
                 double playerScreenX = getWorldX();
@@ -95,7 +100,30 @@ public class Enemy extends EntityGame{
 
                level.getBullets().add(new Bullet(getWorldX(), getWorldY(),4, 1, BaseScreen.canvas, diffEnemy, diff, this));
             }
+
+         */
+        if (fireCounter <= 0) {
+            Player player = level.getPlayer();
+            double playerScreenX = player.getWorldX() - player.getScreenX();
+            double playerScreenY = player.getWorldY() - player.getScreenY();
+            double enemyScreenX = getWorldX() - player.getScreenX();
+            double enemyScreenY = getWorldY() - player.getScreenY();
+
+            double distanceX = playerScreenX - enemyScreenX;
+            double distanceY = playerScreenY - enemyScreenY;
+            double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+            if (distance <= 250) {
+                Vector diff = new Vector(distanceX, distanceY);
+                diff.normalize();
+                diff.setSpeed(4);
+                Vector diffEnemy = new Vector(getWorldX(), getWorldY());
+
+                level.getBullets().add(new Bullet(getWorldX(), getWorldY(), 4, 1, BaseScreen.canvas, diffEnemy, diff, this));
+                fireCounter = fireDelay;
+            }
         }
+    }
 
     @Override
     public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> enemies, Level level) {
