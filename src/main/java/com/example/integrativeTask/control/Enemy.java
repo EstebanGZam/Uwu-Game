@@ -84,24 +84,7 @@ public class Enemy extends EntityGame{
             }
             actionCounter = 0;
         }
-        /*
-        int i = new Random().nextInt(100)+1;
-            if(i>99){
-                double playerScreenX = getWorldX();
-                double playerScreenY = getWorldY();
-                int x= new Random().nextInt(Screen.SCREEN_WIDTH)+1;
-                int y= new Random().nextInt(Screen.SCREEN_HEIGHT)+1;
-                double diffX = x - playerScreenX;
-                double diffY = y - playerScreenY;
-                Vector diff = new Vector(diffX, diffY);
-                diff.normalize();
-                diff.setSpeed(4);
-                Vector diffEnemy = new Vector(getWorldX(), getWorldY());
 
-               level.getBullets().add(new Bullet(getWorldX(), getWorldY(),4, 1, BaseScreen.canvas, diffEnemy, diff, this));
-            }
-
-         */
         if (fireCounter <= 0) {
             Player player = level.getPlayer();
             double playerScreenX = player.getWorldX() - player.getScreenX();
@@ -161,7 +144,7 @@ public class Enemy extends EntityGame{
             }
         if (isInvincible()) {
             setInvincibleCounter(getInvincibleCounter()+1);
-            if (getInvincibleCounter() > 40) {
+            if (getInvincibleCounter() > 20) {
                 setInvincible(false);
                 setInvincibleCounter(0);
             }

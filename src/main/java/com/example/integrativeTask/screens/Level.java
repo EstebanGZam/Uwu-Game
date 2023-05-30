@@ -226,7 +226,6 @@ public class Level extends BaseScreen {
 
 	public void portalUpdate(){
 		if(enemies.size()==0){
-			System.out.println(MainController.LEVEL);
 			if(MainController.LEVEL==2){
 				gameState=gameWinState;
 			}

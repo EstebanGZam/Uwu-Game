@@ -26,7 +26,7 @@ public class KeyHandler {
 			   case C -> {
 				   if(level.getPlayer().getInventory().size() == 0){
 					   
-				   } else if (level.getPlayer().getTypeGun() > level.getPlayer().getInventory().size() ) {
+				   } else if (level.getPlayer().getTypeGun() >= level.getPlayer().getInventory().size() ) {
 					   level.getPlayer().setTypeGun(0);
 					   System.out.println("se quito el arma, ahora no tienes arma");
 					   
