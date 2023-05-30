@@ -18,7 +18,8 @@ public class AssetSetter {
       this.map=map;
     }
     public void setObject(EntityGame[] objects,ArrayList <EntityGame> enemiesList, ArrayList<Point> points){
-
+        Random random = new Random();
+        int numeroAleatorio;
         switch (map){
             case 1:
                 objects[0]= new Object("\\1.png", 48*18,48*16,0,"AK-47",1.5);
@@ -26,9 +27,9 @@ public class AssetSetter {
 
                 objects[1]= new Object("\\portal.png", 48*19,48*21,0,"portal",1.5);
                 objects[1].setCollisionOn(false);
-                generateEnemies(6,points,enemiesList);
-               // Enemy enemy = new Enemy(18*48, 17*48,2,3);
-                //enemiesList.add(enemy);
+                numeroAleatorio = random.nextInt(4) + 3;
+                generateEnemies(numeroAleatorio,points,enemiesList);
+
 
                 break;
             case 2:
@@ -37,10 +38,12 @@ public class AssetSetter {
                 objects[0].setCollisionOn(true);
                 objects[1]= new Object("\\portal.png", 48*19,48*21,0,"portal",1.5);
                 objects[1].setCollisionOn(false);
-                generateEnemies(10,points,enemiesList);
+                numeroAleatorio = random.nextInt(6) + 5;
+                generateEnemies(numeroAleatorio,points,enemiesList);
                 break;
             case 3:
-                generateEnemies(10,points,enemiesList);
+                numeroAleatorio = random.nextInt(8) + 5;
+                generateEnemies(numeroAleatorio,points,enemiesList);
         }
 
 

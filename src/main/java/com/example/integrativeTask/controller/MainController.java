@@ -150,9 +150,7 @@ public class MainController implements Initializable {
 		levels = new ArrayList<>();
 		player = new Player(100, 100, 4, 3, canvas.getGraphicsContext2D());
 		canvas.setFocusTraversable(true);
-		soundtrack();
 		printInCanvas();
-
 		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player, 1));
 		levels.add(new Level(44, 30, canvas, "\\Level-2.txt", player, 2));
 		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player, 3));

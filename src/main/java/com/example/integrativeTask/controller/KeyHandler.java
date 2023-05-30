@@ -46,6 +46,9 @@ public class KeyHandler {
 			   case M -> {
 	             level.getEnemies().clear();
 			   }
+			   case R -> {
+				   level.getPlayer().setBullets(60);
+			   }
 		   }
 	   }else if(level.gameState==level.gameOverState){
 		   if(event.getCode()==KeyCode.SPACE){

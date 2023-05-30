@@ -101,6 +101,7 @@ public class Level extends BaseScreen {
 		tile = new TileManager(maxWorldRow, maxWorldCol, MainController.COLLISIONS_PATH + levelRelativePath);
 		assetSetter.setObject(objects,enemies,tile.getValidPositions());
 		gameState = playState;
+		ui=new Ui();
 
 	}
 
@@ -198,7 +199,7 @@ public class Level extends BaseScreen {
 	@Override
 	public void onMousePressed(MouseEvent event) {
 
-		if (player.getTypeGun() != 0) {
+		if (player.getTypeGun() != 0 && player.getBullets()!=0) {
 			double playerScreenX = player.getScreenX();
 			double playerScreenY = player.getScreenY();
 			double diffX = event.getX() - playerScreenX;
@@ -208,7 +209,8 @@ public class Level extends BaseScreen {
 			diff.normalize();
             diff.setSpeed(speed);
 			Vector diffPlayer = new Vector(player.getWorldX(), player.getWorldY());
-
+			int num= player.bullets-1;
+			player.setBullets(num);
 			bullets.add(new Bullet(player.getWorldX(), player.getWorldY(), speed, 1, canvas, diffPlayer, diff, player));
 		}
 	}

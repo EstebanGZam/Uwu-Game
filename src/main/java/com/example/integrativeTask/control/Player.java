@@ -16,6 +16,8 @@ public class Player extends EntityGame {
 
 	GraphicsContext gr;
 
+	public int bullets=60;
+
 	public int attack;
 
 	private final int ScreenX = 768 / 2 - (48 / 2);
@@ -46,6 +48,7 @@ public class Player extends EntityGame {
 		setLifes(3);
 		setSpeed(4);
 		setDirection("down");
+		bullets=60;
 
 	}
 
@@ -272,5 +275,21 @@ public class Player extends EntityGame {
 
 	public void setTypeGun(int typeGun) {
 		this.typeGun = typeGun;
+	}
+
+	public int getBullets() {
+		return bullets;
+	}
+
+	public void setBullets(int bullets) {
+		this.bullets = bullets;
+	}
+
+	public int getAttack() {
+		return attack;
+	}
+
+	public void setAttack(int attack) {
+		this.attack = attack;
 	}
 }

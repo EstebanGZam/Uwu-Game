@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 
 public class Ui {
 
-    Font arial_40;
+    Font arial_14;
 
     EntityGame heart;
 
@@ -23,6 +23,7 @@ public class Ui {
 
         heart =new Object("\\heart_blank.png", 0,0,0,"AK-47",1.5);
         heart.getImages().add(new Image(Object.TILES_PATH+"\\heart_full.png"));
+        arial_14= new Font("Arial",14);
 
     }
 
@@ -31,6 +32,8 @@ public class Ui {
         if(gameState==gamePlaystate){
             drawPlayerLife(g,player);
             drawPlayerInventary(g,player);
+            drawPlayerBullets(g,player);
+            drawUseAmor(g,player);
         }
         if(gameState == gameOverState){
             drawGameOverScreen(g);
@@ -39,9 +42,6 @@ public class Ui {
         }
 
 
-      //  g.setFont(arial_40);
-       // g.setFill(Color.WHITE);
-        //g.fillText("lifes="+ player.getLifes(),50,50);
 
     }
 
@@ -157,6 +157,34 @@ public class Ui {
             g.drawImage(player.getInventory().get(i).getImages().get(0), x, y, 48, 48);
             i++;
             x += Screen.TILES_SIZE;
+        }
+
+    }
+    public void drawPlayerBullets(GraphicsContext g,Player player) {
+        int x = Screen.TILES_SIZE / 2;
+        int y = (Screen.TILES_SIZE / 2)*2+60;
+
+        g.setFont(arial_14);
+        g.setFill(Color.WHITE);
+        g.fillText("bullets="+ player.getBullets(),x,y);
+
+    }
+
+    public void drawUseAmor(GraphicsContext g,Player player) {
+        int x = Screen.TILES_SIZE / 2;
+        int y = (Screen.TILES_SIZE / 2)*2+40;
+
+        if(player.getInventory()!=null){
+            if(player.getTypeGun()==0){
+
+            }
+            else if(player.getTypeGun()==1){
+               g.setFill(Color.YELLOW);
+               g.fillRect(x, y, 48, 3);
+            }else if(player.getTypeGun()==2){
+                g.setFill(Color.YELLOW);
+                g.fillRect(x+48, y, 48, 3);
+            }
         }
 
     }
