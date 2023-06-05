@@ -1,7 +1,7 @@
 package com.example.integrativeTask.controller;
 
 import com.example.integrativeTask.control.Music;
-import com.example.integrativeTask.control.Player;
+import com.example.integrativeTask.model.Player;
 import com.example.integrativeTask.screens.Level;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,26 +14,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
-
+public class GameController implements Initializable {
 	public static final String MAIN_RESOURCES_PATH = System.getProperty("user.dir") + "\\src\\main\\resources";
 	public static final String IMAGES_PATH = MAIN_RESOURCES_PATH + "\\images";
 	public static final String AUDIO_PATH = MAIN_RESOURCES_PATH + "\\audio";
 	public static final String COLLISIONS_PATH = MAIN_RESOURCES_PATH + "\\collisions";
-	public static int LEVEL = 0;
+	public static int LEVEL = 0; // Variable defining the current level
+	public static final int MAXIMUM_NUMBER_OF_LEVELS = 3; // Constant defining the maximum number of levels
 	private ArrayList<Level> levels;
 	private Player player;
-
 	@FXML
 	private Canvas canvas;
 	@FXML
 	private GraphicsContext graphics;
-
-
 	@FXML
 	private Music music;
 	private boolean isRunning;
-
 	public static boolean reset;
 
 	@Override
@@ -43,17 +39,14 @@ public class MainController implements Initializable {
 
 	private void start() {
 		graphics = canvas.getGraphicsContext2D();
-		reset=false;
+		reset = false;
 		isRunning = true;
-		levels = new ArrayList<>();
-		player = new Player(100, 100, 4, 3, canvas.getGraphicsContext2D());
+		player = new Player(4, 3);
 		canvas.setFocusTraversable(true);
 		soundtrack();
 		printInCanvas();
 
-		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player, 1));
-		levels.add(new Level(44, 30, canvas, "\\Level-2.txt", player, 2));
-		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player, 3));
+		this.levels = initLevels();
 		initEvents();
 	}
 
@@ -66,8 +59,6 @@ public class MainController implements Initializable {
 		graphics.drawImage(getImage("\\menu2.jpg"), 0, 0, 768.0, 576.0);
 		graphics.drawImage(getImage("\\logo.png"), -100, -100, 960, 776);
 		graphics.drawImage(getImage("\\enter.png"), 0, 130, 768, 576);
-
-
 	}
 
 	private Image getImage(String relativePath) {
@@ -77,27 +68,22 @@ public class MainController implements Initializable {
 
 	public void run() {
 		new Thread(() -> {
-			long targetFPS = 60; // El objetivo es ejecutar el juego a 60 fotogramas por segundo
-			long targetFrameTime = 1000 / targetFPS; // Tiempo objetivo por fotograma en milisegundos
+			long targetFPS = 60; // The goal is to run the game at 60 frames per second.
+			long targetFrameTime = 1000 / targetFPS; // target time per frame in milliseconds.
 			long lastDrawTime = System.currentTimeMillis();
 			while (isRunning) {
-
 				long currentTime, elapsedTime;
-
 				levels.get(LEVEL).update();
-
 				currentTime = System.currentTimeMillis();
 				elapsedTime = currentTime - lastDrawTime;
 				if (elapsedTime >= targetFrameTime) {
 					lastDrawTime = currentTime;
 					levels.get(LEVEL).paint();
 				}
-
-				if(reset){
+				if (reset) {
 					resetGame();
 				}
-
-				// Calcular el tiempo de espera antes del siguiente fotograma
+				// Calculate the time to wait before the next frame
 				long remainingTime = targetFrameTime - (System.currentTimeMillis() - lastDrawTime);
 				if (remainingTime > 0) {
 					pause(remainingTime);
@@ -112,22 +98,9 @@ public class MainController implements Initializable {
 			levels.get(LEVEL).onKeyPressed(event);
 			setRunning(true);
 		});
-		canvas.setOnKeyReleased(event -> {
-			levels.get(LEVEL).onKeyReleased(event);
-		});
-
-		canvas.setOnMouseMoved(mouseEvent -> {
-
-			levels.get(LEVEL).mouseMoved(mouseEvent);
-
-		});
-
-		canvas.setOnMousePressed(mouseEvent -> {
-
-			levels.get(LEVEL).onMousePressed(mouseEvent);
-
-		});
-
+		canvas.setOnKeyReleased(event -> levels.get(LEVEL).onKeyReleased(event));
+		canvas.setOnMouseMoved(mouseEvent -> levels.get(LEVEL).mouseMoved(mouseEvent));
+		canvas.setOnMousePressed(mouseEvent -> levels.get(LEVEL).onMousePressed(mouseEvent));
 	}
 
 	private void pause(long time) {
@@ -142,27 +115,26 @@ public class MainController implements Initializable {
 		isRunning = running;
 	}
 
-	public void resetGameIn(){
-		LEVEL=0;
+	public void resetGame() {
+		setRunning(false); // Stop game thread
+		LEVEL = 0;
+		reset = false;
+		player = new Player(4, 3);
+
+		graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		graphics = canvas.getGraphicsContext2D();
-		reset=false;
-		isRunning = false;
-		levels = new ArrayList<>();
-		player = new Player(100, 100, 4, 3, canvas.getGraphicsContext2D());
 		canvas.setFocusTraversable(true);
+
 		printInCanvas();
-		levels.add(new Level(44, 30, canvas, "\\Level-1.txt", player, 1));
-		levels.add(new Level(44, 30, canvas, "\\Level-2.txt", player, 2));
-		levels.add(new Level(44, 30, canvas, "\\Level-3.txt", player, 3));
+		this.levels = initLevels();
 		initEvents();
 	}
 
-	public  void resetGame() {
-		// Detener el hilo del juego
-		setRunning(false);
-		player = new Player(100, 100, 4, 3, canvas.getGraphicsContext2D());
-		graphics.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		resetGameIn();
+	private ArrayList<Level> initLevels() {
+		ArrayList<Level> levels = new ArrayList<>();
+		for (int i = 1; i <= MAXIMUM_NUMBER_OF_LEVELS; i++)
+			levels.add(new Level(44, 30, canvas, "\\Level-" + i + ".txt", player, i));
+		return levels;
 	}
 
 }

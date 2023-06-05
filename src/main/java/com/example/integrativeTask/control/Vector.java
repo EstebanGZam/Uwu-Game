@@ -2,39 +2,41 @@ package com.example.integrativeTask.control;
 
 public class Vector {
 
-    private double x;
-    private double y;
+	private double x;
+	private double y;
 
-    public Vector(double x, double y){
-        this.x = x;
-        this.y = y;
-    }
-    public void normalize(){
-        double magnitude = Math.sqrt(x * x + y * y);
-        if (magnitude != 0) {
-            x /= magnitude;
-            y /= magnitude;
-        }
-    }
+	public Vector(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
 
-    public void setSpeed(int speed){
-        x*=speed;
-        y*=speed;
-    }
+	public void normalize() {
+		double magnitude = Math.sqrt(x * x + y * y);
+		if (magnitude != 0) {
+			x /= magnitude;
+			y /= magnitude;
+		}
+	}
 
-    public double getX() {
-        return x;
-    }
+	public void setSpeed(int speed) {
+		x *= speed;
+		y *= speed;
+	}
 
-    public void setX(double x) {
-        this.x = x;
-    }
+	public double getX() {
+		return x;
+	}
 
-    public double getY() {
-        return y;
-    }
+	public void setX(double x) {
+		this.x = x;
+	}
 
-    public void setY(double y) {
-        this.y = y;
-    }
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
 }

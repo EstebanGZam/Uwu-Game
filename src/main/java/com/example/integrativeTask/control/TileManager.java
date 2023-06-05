@@ -1,6 +1,6 @@
 package com.example.integrativeTask.control;
 
-import com.example.integrativeTask.controller.MainController;
+import com.example.integrativeTask.controller.GameController;
 import com.example.integrativeTask.model.Point;
 import com.example.integrativeTask.model.Tile;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,17 +10,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class TileManager {
-	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\tiles-sprites";
+	public static final String TILES_PATH = GameController.MAIN_RESOURCES_PATH + "\\tiles-sprites";
 	private final int TILES_AMOUNT = 12;
 
-	private Tile[] tile;
+	private final Tile[] tile;
 
-	private int[][] mapTileNum;
+	private final int[][] mapTileNum;
 
-	private ArrayList<Point> validPositions;
+	private final ArrayList<Point> validPositions;
 
-	private int maxWorldCol;
-	private int maxWorldRow;
+	private final int maxWorldCol, maxWorldRow;
 	private final String stagePath;
 
 
@@ -42,12 +41,6 @@ public class TileManager {
 			if (i > 6) tile[i].setCollision(true);
 		}
 
-//		tile[7].setCollision(true);
-//		tile[8].setCollision(true);
-//		tile[9].setCollision(true);
-//		tile[10].setCollision(true);
-//		tile[11].setCollision(true);
-
 	}
 
 	private Image getTileImage(String relativePath) {
@@ -68,13 +61,13 @@ public class TileManager {
 				String line = reader.readLine();
 				while (col < maxWorldCol) {
 
-					String[] nume = line.split(" ");
-					int num = Integer.parseInt(nume[col]);
+					String[] numbers = line.split(" ");
+					int num = Integer.parseInt(numbers[col]);
 
 					mapTileNum[row][col] = num;
 					col++;
-					if (!tile[num].isCollision()&&row!=11&&row!=12&&row!=13) {
-							validPositions.add(new Point(col, row));
+					if (!tile[num].isCollision() && row != 11 && row != 12 && row != 13) {
+						validPositions.add(new Point(col, row));
 
 					}
 				}
@@ -120,39 +113,12 @@ public class TileManager {
 		return tile;
 	}
 
-	public void setTile(Tile[] tile) {
-		this.tile = tile;
-	}
-
 	public int[][] getMapTileNum() {
 		return mapTileNum;
-	}
-
-	public void setMapTileNum(int[][] mapTileNum) {
-		this.mapTileNum = mapTileNum;
-	}
-
-	public int getMaxWorldCol() {
-		return maxWorldCol;
-	}
-
-	public void setMaxWorldCol(int maxWorldCol) {
-		this.maxWorldCol = maxWorldCol;
-	}
-
-	public int getMaxWorldRow() {
-		return maxWorldRow;
-	}
-
-	public void setMaxWorldRow(int maxWorldRow) {
-		this.maxWorldRow = maxWorldRow;
 	}
 
 	public ArrayList<Point> getValidPositions() {
 		return validPositions;
 	}
 
-	public void setValidPositions(ArrayList<Point> validPositions) {
-		this.validPositions = validPositions;
-	}
 }
