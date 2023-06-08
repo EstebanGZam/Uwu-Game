@@ -1,8 +1,7 @@
-package com.example.integrativeTask.model;
+package com.example.integrativeTask.control;
 
-import com.example.integrativeTask.control.TileManager;
+import com.example.integrativeTask.controller.CollisionChecker;
 import com.example.integrativeTask.screens.Level;
-import com.example.integrativeTask.util.CollisionChecker;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -10,33 +9,42 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class EntityGame {
-	protected final ArrayList<Image> images;
-	private int worldX;
-	private int worldY;
-	private final int speed;
-	private int spriteCounter = 0;
-	private int spriteNum = 1;
+    private ArrayList <Image> images;
+
+	private int worldX, worldY, speed, spriteCounter = 0, spriteNum = 1;
 	private String direction;
 	protected Rectangle area;
-	private int solidAreaDefaultX, solidAreaDefaultY;
+
+	private int solidAreaDefaultX;
+	private int solidAreaDefaultY;
 	private boolean collisionOn;
+	private int lifes;
+	private int Maxlifes;
+
 	private String name;
+
 	public boolean invincible;
+
 	public int invincibleCounter;
 
-	public EntityGame(int x, int y, int speed) {
+
+	public EntityGame(int x, int y, int speed,int lifes) {
 		this.worldX = x;
 		this.worldY = y;
 		this.speed = speed;
+		this.lifes=lifes;
+		this.Maxlifes=lifes;
 		direction = "down";
-		images = new ArrayList<>();
+		images= new ArrayList<>();
 	}
 
-	public void print(GraphicsContext graphicsContext, Player player) {
+	public void print(GraphicsContext graphicsContext, Player player){
+
 	}
 
-	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<Enemy> enemies, Level level) {
+	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] object, ArrayList<EntityGame> enemies, Level level) {
 	}
+
 
 	public int getWorldX() {
 		return worldX;
@@ -58,6 +66,9 @@ public abstract class EntityGame {
 		return speed;
 	}
 
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
 
 	public String getDirection() {
 		return direction;
@@ -100,6 +111,10 @@ public abstract class EntityGame {
 		return images;
 	}
 
+	public void setImages(ArrayList<Image> images) {
+		this.images = images;
+	}
+
 	public int getSolidAreaDefaultX() {
 		return solidAreaDefaultX;
 	}
@@ -122,6 +137,22 @@ public abstract class EntityGame {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getLifes() {
+		return lifes;
+	}
+
+	public void setLifes(int lifes) {
+		this.lifes = lifes;
+	}
+
+	public int getMaxlifes() {
+		return Maxlifes;
+	}
+
+	public void setMaxlifes(int maxlifes) {
+		Maxlifes = maxlifes;
 	}
 
 	public boolean isInvincible() {

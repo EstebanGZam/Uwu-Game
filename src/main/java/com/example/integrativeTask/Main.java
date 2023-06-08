@@ -1,6 +1,6 @@
 package com.example.integrativeTask;
 
-import com.example.integrativeTask.controller.GameController;
+import com.example.integrativeTask.controller.MainController;
 import com.example.integrativeTask.screens.Screen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +13,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		FXMLLoader fxmlLoader = renderView("main-view.fxml", "Uwu game");
-		GameController gameController = fxmlLoader.getController();
-		stage.setOnCloseRequest(windowEvent -> gameController.setRunning(false));
+		MainController mainController = fxmlLoader.getController();
+		stage.setOnCloseRequest(windowEvent -> mainController.setRunning(false));
 	}
 
 	public static FXMLLoader renderView(String fxml, String title) {

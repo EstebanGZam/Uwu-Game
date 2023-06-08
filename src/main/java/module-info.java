@@ -14,7 +14,5 @@ module com.example.integrativeTask {
 	opens com.example.integrativeTask.model to javafx.fxml;
 	exports com.example.integrativeTask.screens;
 	opens com.example.integrativeTask.screens to javafx.fxml;
-	exports com.example.integrativeTask.util;
-	opens com.example.integrativeTask.util to javafx.fxml;
 
 }

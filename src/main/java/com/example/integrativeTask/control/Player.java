@@ -1,32 +1,35 @@
-package com.example.integrativeTask.model;
+package com.example.integrativeTask.control;
 
-import com.example.integrativeTask.control.TileManager;
-import com.example.integrativeTask.util.CollisionChecker;
-import com.example.integrativeTask.util.KeyHandler;
-import com.example.integrativeTask.controller.GameController;
+import com.example.integrativeTask.controller.CollisionChecker;
+import com.example.integrativeTask.controller.KeyHandler;
+import com.example.integrativeTask.controller.MainController;
 import com.example.integrativeTask.screens.Level;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-public class Player extends Character {
+public class Player extends EntityGame {
 
-	public static final String PLAYER_IMAGES_PATH = GameController.MAIN_RESOURCES_PATH + "\\16x16-RPG-characters\\sprites\\new-style";
+	public static final String TILES_PATH = MainController.MAIN_RESOURCES_PATH + "\\16x16-RPG-characters\\sprites\\new-style";
 
-	public int bullets = 60; // Maximum number of bullets in a player's possession
+	GraphicsContext gr;
+
+	public int bullets=60;
+
+	public int attack;
 
 	private final int ScreenX = 768 / 2 - (48 / 2);
 	private final int ScreenY = 560 / 2 - (48 / 2);
 
-	private final ArrayList<EntityGame> inventory = new ArrayList<>();
+	private ArrayList<EntityGame> inventory = new ArrayList<>();
 
 	int typeGun = 0;
 
-	public Player(int speed, int lives) {
-		super(100, 100, speed, lives); // The player is created in the 100x100 position by default.
+	public Player(int x, int y, int speed, int lives, GraphicsContext gr) {
+		super(x, y, speed, lives);
+		this.gr = gr;
 		area = new Rectangle();
 		area.x = 7;
 		area.y = 14;
@@ -34,32 +37,36 @@ public class Player extends Character {
 		area.height = 32;
 		setSolidAreaDefaultX(area.x);
 		setSolidAreaDefaultY(area.y);
-		setDefaultPlayerProperties();
+		setDefault();
 		getPlayerImage();
 	}
 
 
-	public void setDefaultPlayerProperties() {
-		super.setWorldX(100 * 4);  // Player's starting position in X
-		super.setWorldY(100 * 4);  // Player's starting position in Y
-		super.lives = 3; // Number of initial lives
-		super.setDirection("down");
-		bullets = 60;
+	public void setDefault() {
+		setWorldX(100 * 4);  // posicion de inicio del jugagor
+		setWorldY(100 * 4);  // posicion de inicio del jugador
+		setLifes(3);
+		setSpeed(4);
+		setDirection("down");
+		bullets=60;
+
 	}
 
 
+
 	public void getPlayerImage() {
+
 		for (int i = 1; i <= 3; i++) {
-			images.add(i - 1, new Image(PLAYER_IMAGES_PATH + "\\up" + i + ".png"));
+			getImages().add(new Image(TILES_PATH + "\\up" + i + ".png"));
 		}
 		for (int i = 1; i <= 3; i++) {
-			images.add(new Image(PLAYER_IMAGES_PATH + "\\down" + i + ".png"));
+			getImages().add(new Image(TILES_PATH + "\\down" + i + ".png"));
 		}
 		for (int i = 1; i <= 3; i++) {
-			images.add(new Image(PLAYER_IMAGES_PATH + "\\left" + i + ".png"));
+			getImages().add(new Image(TILES_PATH + "\\left" + i + ".png"));
 		}
 		for (int i = 1; i <= 3; i++) {
-			images.add(new Image(PLAYER_IMAGES_PATH + "\\right" + i + ".png"));
+			getImages().add(new Image(TILES_PATH + "\\right" + i + ".png"));
 		}
 	}
 
@@ -117,10 +124,12 @@ public class Player extends Character {
 		graphicsContext.drawImage(image, ScreenX, ScreenY, 48, 48);
 	}
 
-	// Player class update, that is moving and updating states.
-	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<Enemy> enemies, Level level) {
+	//actualizacion de la clase player, esto es mover y actualizacion de estados.
+	 @Override
+	public void move(CollisionChecker collisionChecker, TileManager tile, Player player, EntityGame[] objects, ArrayList<EntityGame> Enemies, Level level) {
 		KeyHandler keyHandler = KeyHandler.getInstance();
-		if (keyHandler.isKeyMovementPressed()) {
+		if (keyHandler.isUpPressed() || keyHandler.isDownPressed() ||
+				keyHandler.isLeftPressed() || keyHandler.isRightPressed()) {
 			if (keyHandler.isUpPressed()) {
 				setDirection("up");
 			} else if (keyHandler.isDownPressed()) {
@@ -130,17 +139,25 @@ public class Player extends Character {
 			} else {
 				setDirection("right");
 			}
+
 			setCollisionOn(false);
 			collisionChecker.checkTile(this, tile);
 			int objIndex = collisionChecker.checkObject(this, true, objects);
 			pickObject(objIndex, objects);
 
-			int monsterIndex = collisionChecker.checkEntity(this, enemies.stream()
-					.map(child -> (EntityGame) child)
-					.collect(Collectors.toCollection(ArrayList::new)));
-			contactEnemy(monsterIndex);
+			int monsterIndex = collisionChecker.checkEntity(this, Enemies);
+			contactEnemy(monsterIndex, Enemies);
 
-			super.move();
+			if (!isCollisionOn()) {
+				switch (getDirection()) {
+					case "up" -> setWorldY(getWorldY() - getSpeed());
+					case "down" -> setWorldY(getWorldY() + getSpeed());
+					case "left" -> setWorldX(getWorldX() - getSpeed());
+					case "right" -> setWorldX(getWorldX() + getSpeed());
+				}
+			}
+
+			setSpriteCounter(getSpriteCounter() + 1);
 
 			if (getSpriteCounter() > 12) {
 				if (getSpriteNum() == 1 || getSpriteNum() == 2) {
@@ -161,20 +178,22 @@ public class Player extends Character {
 
 	}
 
+
+
 	public void pickObject(int i, EntityGame[] objects) {
 		if (i != 999) {
 			switch (objects[i].getName()) {
-				case "AK-47", "pistol" -> {
+				case "AK-47", "pistol":
 					if (inventory.size() < 2) {
 						inventory.add(objects[i]);
 					}
 					objects[i] = null;
-				}
-				case "portal" -> {
-					objects[i] = null;
-					GameController.LEVEL++;
-					setDefaultPlayerProperties();
-				}
+					break;
+				case "portal":
+						objects[i] = null;
+						MainController.LEVEL++;
+						setDefault();
+					break;
 			}
 
 		}
@@ -182,42 +201,43 @@ public class Player extends Character {
 	}
 
 	public int gunActual(int i) {
-		if (i != 999) {
-			switch (inventory.get(i - 1).getName()) {
-				case "AK-47" -> {
-					return 8;
+		if(inventory != null){
+			if (i != 999) {
+				switch (inventory.get(i-1).getName()) {
+					case "AK-47":
+						return 8;
+					case "pistol":
+						return  5;
 				}
-				case "pistol" -> {
-					return 5;
-				}
-			}
 
+			}
+			return 10;
 		}
 		return 10;
 	}
 
-	public void contactEnemy(int i) {
+	public void contactEnemy(int i, ArrayList<EntityGame> enemies) {
 		if (i != 999) {
 			if (!invincible) {
-				super.setLives(getLives() - 1);
-				this.invincible = true;
+				setLifes(getLifes() - 1);
+				invincible = true;
 			}
 
 		}
 
 	}
 
-	public void damageMonster(int i, int attack, Level level) {
-		if (i != 999) {
-			if (!level.getEnemies().get(i).isInvincible()) {
-				int damage = level.getEnemies().get(i).getLives() - attack;
-				if (damage < 0) {
-					damage = 0;
+	public void damageMonster(int i , int attack, Level level){
+		if(i!=999){
+			if(!level.getEnemies().get(i).isInvincible()){
+				int damage= level.getEnemies().get(i).getLifes()-attack;
+				if(damage<0){
+					damage=0;
 				}
-				System.out.println("Attacked him");
-				level.getEnemies().get(i).setLives(damage);
+				System.out.println("lo ataco");
+				level.getEnemies().get(i).setLifes(damage);
 				level.getEnemies().get(i).setInvincible(true);
-				if (level.getEnemies().get(i).getLives() <= 0) {
+				if(level.getEnemies().get(i).getLifes()<=0){
 					level.getEnemies().remove(i);
 				}
 			}
@@ -235,6 +255,10 @@ public class Player extends Character {
 
 	public ArrayList<EntityGame> getInventory() {
 		return inventory;
+	}
+
+	public void setInventory(ArrayList<EntityGame> inventory) {
+		this.inventory = inventory;
 	}
 
 	public boolean isInvincible() {
@@ -259,5 +283,13 @@ public class Player extends Character {
 
 	public void setBullets(int bullets) {
 		this.bullets = bullets;
+	}
+
+	public int getAttack() {
+		return attack;
+	}
+
+	public void setAttack(int attack) {
+		this.attack = attack;
 	}
 }

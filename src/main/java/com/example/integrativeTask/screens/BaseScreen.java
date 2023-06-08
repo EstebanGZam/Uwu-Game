@@ -10,7 +10,7 @@ public abstract class BaseScreen {
 	protected GraphicsContext graphicsContext;
 
 	public BaseScreen(Canvas canvas) {
-		BaseScreen.canvas = canvas;
+		this.canvas = canvas;
 		this.graphicsContext = canvas.getGraphicsContext2D();
 	}
 
@@ -21,5 +21,6 @@ public abstract class BaseScreen {
 	public abstract void onKeyReleased(KeyEvent event);
 
 	public abstract  void onMousePressed(MouseEvent event);
+
 
 }
